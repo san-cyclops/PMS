@@ -15,7 +15,10 @@ app.service('logservice', function ($http) {
 
 
 app.controller('APIController', function ($scope, $http, $window,logservice) {
- 
+
+    $scope.UserName = 'amilaprageeth@gmail.com';
+    $scope.Password = '123';
+
     $scope.login = function () {
 
 
