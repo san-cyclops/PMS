@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+
+<link type="text/css" rel="stylesheet" href="~/css/login.css">
+
+<div class="wrapper"  data-ng-app="APIModule">
+    <div class="container" ng-controller="APIController">
+       <form class="form">
+            <input type="text" placeholder="Username" data-ng-model="UserName">
+            <input type="password" placeholder="Password" data-ng-model="Password">
+            <button type="submit" ng-click="login()">Login</button>
+        </form>
+    </div>
+
+    <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="~/js/site.js"></script>
+<script src="~/js/angular.js"></script>
+<script src="~/js/login_controller.js"></script>
