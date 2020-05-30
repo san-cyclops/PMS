@@ -1,9 +1,12 @@
-﻿
+﻿@model PMS.Models.SessionKey
+@inject IJsonHelper Json;
 @{
     ViewData["Title"] = "Patient";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
- 
+<script type="text/javascript">
+    var SessionKey = @Html.Raw(@Json.Serialize(Model));
+</script>
 <div class="panel panel-orange" ng-app="apimodule">
     <div class="panel-heading">
         Patient

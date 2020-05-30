@@ -29,12 +29,13 @@ app.service('logservice', function ($http) {
 
         });
     };
-    this.loaddata = function () {
+    this.loaddata = function (sub) {
         console.log("GetAllCourseType");
         return $http({
             method: "POST",
+            data = sub,
             contentType: "application/json; charset=utf-8",
-            url: "/Data/GetAll?type=CourseType"
+            url: "https://localhost:5001/EHealthCareAPI/Patient"
 
         });
     };
@@ -164,7 +165,40 @@ app.controller('MainCtrl', function ($scope, $http, $window, logservice) {
             vm.search = '';
             isEditing = false;
             let newData = {};
-            console.log("loaddata");
+
+            $scope.sessionKey = $window.SessionKey;
+
+
+            console.log("loaddata", $window.SessionKey);
+
+            var obj = {
+                authKey: param,
+                password: string,
+                username: string,
+                patientMasterDataID: 0,
+                userStatus: string,
+                patientData: {
+                    surname: string,
+                    name: string,
+                    dateOfBirth: string,
+                    gender: string,
+                    homeAddress: string,
+                    depentes: string,
+                    workAdderss: string,
+                    mobileNumber: string,
+                    homeNumber: string,
+                    officeNumber: string,
+                    imageUrl: string,
+                    officeEmail: string,
+                    email: string,
+                    alias: string,
+                    patientDataID: 0,
+                    patientMasterDataID: 0
+                },
+                authkey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFtaWxhcHJhZ2VldGhAZ21haWwuY29tIiwibmFtZWlkIjoiYW1pbGFwcmFnZWV0aEBnbWFpbC5jb20iLCJyb2xlIjoicGF0aWVudCIsIm5iZiI6MTU5MDg3MDY3MCwiZXhwIjoxNTkwODcxMTUwLCJpYXQiOjE1OTA4NzA2NzAsImlzcyI6Imh0dHA6Ly9teXNpdGUuY29tIiwiYXVkIjoiaHR0cDovL215YXVkaWVuY2UuY29tIn0.JmQtl8fP_vWQzaEvBXpqzLiSBhXyE - Rk9CUW2WDzxcQ,
+                traceId: string
+                
+            }
 
             var loadData = logservice.loaddata()
             loadData.then(function (d) {

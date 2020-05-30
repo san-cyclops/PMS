@@ -30,10 +30,21 @@ app.controller('APIController', function ($scope, $http, $window,logservice) {
         servCall.then(function (d) {
             console.log("Done", d.data);
             console.log(d.data.authenticationKey);
-            var param = d.data.authenticationKey;
+            $scope.param = d.data.authenticationKey;
             //$window.open('/Home/Index');
-            var url = '/Home/Index?authKey=' + param 
-            window.open(url);
+            var sessionKey = {
+                UserName: $scope.UserName,
+                Password: $scope.Password,
+                AuthKey: $scope.param 
+            }
+            var JsonString = JSON.stringify(sessionKey);
+
+            console.log("sessionKey", JsonString);
+
+            //$http.post('/Home/Index', JsonString);
+
+            var url = '/Home/Index?UserName=' + $scope.UserName + "&Password=" + $scope.Password + "&AuthKey=" + $scope.param 
+            window.open(url, "_self");
 
         }, function (error) {
             console.log("Oops! Something went wrong while fetching the data.");

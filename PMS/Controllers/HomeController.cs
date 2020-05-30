@@ -9,6 +9,7 @@ using PMS.Models;
 using PMS.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace PMS.Controllers
 {
@@ -16,14 +17,21 @@ namespace PMS.Controllers
     {
         const string SessionKey = "_AuthKey";
 
-        public IActionResult Index(string authKey)
+        public IActionResult Index(string UserName,string Password,string AuthKey) 
         {
-            HttpContext.Session.SetString(SessionKey, authKey);
-            TempData["authKey"] = authKey;
+            SessionKey sessionKey = new SessionKey();
+            sessionKey.UserName = UserName;
+            sessionKey.Password = Password;
+            sessionKey.AuthKey = AuthKey;
+
+            string strjson = JsonConvert.SerializeObject(sessionKey);
+
+            HttpContext.Session.SetString(SessionKey,strjson);
+            TempData["sessionKey"] = strjson; 
             return View();
         }
         public IActionResult Login()
-        {
+        { 
             return View();
         }
         public IActionResult UserConfig()
@@ -35,8 +43,11 @@ namespace PMS.Controllers
             return View();
         }
         public IActionResult Patient()
-        {
-            return View();
+        { 
+            SessionKey sessionKey = new SessionKey();
+            string vt = TempData["sessionKey"].ToString();
+            sessionKey = JsonConvert.DeserializeObject<SessionKey>(vt);
+            return View(sessionKey);
         }
         public IActionResult Appointment()
         {
