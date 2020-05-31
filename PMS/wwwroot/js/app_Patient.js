@@ -35,7 +35,7 @@ app.service('logservice', function ($http) {
             method: "POST",
             contentType: "application/json; charset=utf-8",
             data: sub,
-            url: "https://localhost:5001/EHealthCareAPI/Patient/GetPatientRS"
+            url: "https://localhost:5001/EHealthCareAPI/Patient/ValidatePatientRS"
 
         });
     };
