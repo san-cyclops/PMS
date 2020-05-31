@@ -30,12 +30,12 @@ app.service('logservice', function ($http) {
         });
     };
     this.loaddata = function (sub) {
-        console.log("GetAllCourseType");
+        console.log("loaddata", sub);
         return $http({
             method: "POST",
-            data = sub,
             contentType: "application/json; charset=utf-8",
-            url: "https://localhost:5001/EHealthCareAPI/Patient"
+            data: sub,
+            url: "https://localhost:5001/EHealthCareAPI/Patient/GetPatientRS"
 
         });
     };
@@ -45,7 +45,7 @@ app.service('logservice', function ($http) {
 
 
 
-app.controller('MainCtrl', function ($scope, $http, $window, logservice) {
+app.controller('MainCtrl', function ($scope, $window, $http, logservice) {
 
     let vm = this,
         addressCollection = [],
@@ -169,38 +169,40 @@ app.controller('MainCtrl', function ($scope, $http, $window, logservice) {
             $scope.sessionKey = $window.SessionKey;
 
 
-            console.log("loaddata", $window.SessionKey);
+            console.log("sessionKey", $scope.sessionKey);
 
             var obj = {
-                authKey: param,
-                password: string,
-                username: string,
+                password: $scope.sessionKey.password,
+                username: $scope.sessionKey.userName,
                 patientMasterDataID: 0,
-                userStatus: string,
+                userStatus: "",
                 patientData: {
-                    surname: string,
-                    name: string,
-                    dateOfBirth: string,
-                    gender: string,
-                    homeAddress: string,
-                    depentes: string,
-                    workAdderss: string,
-                    mobileNumber: string,
-                    homeNumber: string,
-                    officeNumber: string,
-                    imageUrl: string,
-                    officeEmail: string,
-                    email: string,
-                    alias: string,
+                    surname: "",
+                    name: "",
+                    dateOfBirth: "",
+                    gender: "",
+                    homeAddress: "",
+                    depentes: "",
+                    workAdderss: "",
+                    mobileNumber: "",
+                    homeNumber: "",
+                    officeNumber: "",
+                    imageUrl: "",
+                    officeEmail: "",
+                    email: "",
+                    alias: "",
                     patientDataID: 0,
                     patientMasterDataID: 0
                 },
-                authkey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFtaWxhcHJhZ2VldGhAZ21haWwuY29tIiwibmFtZWlkIjoiYW1pbGFwcmFnZWV0aEBnbWFpbC5jb20iLCJyb2xlIjoicGF0aWVudCIsIm5iZiI6MTU5MDg3MDY3MCwiZXhwIjoxNTkwODcxMTUwLCJpYXQiOjE1OTA4NzA2NzAsImlzcyI6Imh0dHA6Ly9teXNpdGUuY29tIiwiYXVkIjoiaHR0cDovL215YXVkaWVuY2UuY29tIn0.JmQtl8fP_vWQzaEvBXpqzLiSBhXyE - Rk9CUW2WDzxcQ,
-                traceId: string
+                authkey: $scope.sessionKey.authKey,
+                traceId: "102030"
                 
             }
+ 
+             
 
-            var loadData = logservice.loaddata()
+            //var JsonString = JSON.stringify(obj);
+            var loadData = logservice.loaddata(obj)
             loadData.then(function (d) {
 
                 console.log("Succss - ", d.data);

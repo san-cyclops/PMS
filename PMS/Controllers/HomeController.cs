@@ -25,8 +25,9 @@ namespace PMS.Controllers
             sessionKey.AuthKey = AuthKey;
 
             string strjson = JsonConvert.SerializeObject(sessionKey);
+             
+            HttpContext.Session.SetObjectAsJson("SessionKey", sessionKey);
 
-            HttpContext.Session.SetString(SessionKey,strjson);
             TempData["sessionKey"] = strjson;
             TempData["username"] = UserName;
             return View();
@@ -46,8 +47,10 @@ namespace PMS.Controllers
         public IActionResult Patient()
         { 
             SessionKey sessionKey = new SessionKey();
-            string vt = TempData["sessionKey"].ToString();
-            sessionKey = JsonConvert.DeserializeObject<SessionKey>(vt);
+            sessionKey = HttpContext.Session.GetObjectFromJson<SessionKey>("SessionKey");
+
+            //string vt = TempData["sessionKey"].ToString();
+            //sessionKey = JsonConvert.DeserializeObject<SessionKey>(vt);
             TempData["username"] = sessionKey.UserName;
             return View(sessionKey);
         }
