@@ -44,6 +44,11 @@ namespace PMS.Controllers
         {
             return View();
         }
+        public IActionResult Appointment()
+        {
+            return View();
+        }
+
         public IActionResult Patient()
         { 
             SessionKey sessionKey = new SessionKey();
@@ -54,11 +59,6 @@ namespace PMS.Controllers
             TempData["username"] = sessionKey.UserName;
             return View(sessionKey);
         }
-        public IActionResult Appointment()
-        {
-            return View();
-        }
-
 
         [HttpPost]
         public string GetUserRS(string userName, string password)
