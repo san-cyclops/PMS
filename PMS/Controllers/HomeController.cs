@@ -46,7 +46,13 @@ namespace PMS.Controllers
         }
         public IActionResult Appointment()
         {
-            return View();
+            SessionKey sessionKey = new SessionKey();
+            sessionKey = HttpContext.Session.GetObjectFromJson<SessionKey>("SessionKey");
+
+            //string vt = TempData["sessionKey"].ToString();
+            //sessionKey = JsonConvert.DeserializeObject<SessionKey>(vt);
+            TempData["username"] = sessionKey.UserName;
+            return View(sessionKey);
         }
 
         public IActionResult Patient()

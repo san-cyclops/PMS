@@ -4,41 +4,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>Angular Custom Select</title>
-
-    <meta name="description" content="overview &amp; stats" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script type="text/javascript">
+    var SessionKey = @Html.Raw(@Json.Serialize(Model));
+</script>
+ 
+ 
 
     <!-- basic styles -->
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" />
-
-    <!--[if IE 7]>
-      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" />
-    <![endif]-->
-
+    
+ 
     <link rel="stylesheet" href="~/css/style.css" />
-    <style>
+ 
 
-        body {
-            margin-top: 20px;
-            margin-bottom: 150px;
-        }
-    </style>
-</head>
-
-<body ng-app="apimodule">
+<div ng-app="apimodule">
     <div ng-controller="MainCtrl">
         <!--BEGIN THEME SETTING-->
 
-
         <div class="col-lg-12">
-
             <div class="row">
                 <div class="col-lg-6">
                     <div class="panel">
@@ -48,7 +31,7 @@
                         <div class="panel-body pan">
                             <div class="form-group">
                                 <div class="text-center mbl">
-                                    <img src="http://lorempixel.com/640/480/business/1/" alt=""
+                                    <img src="{{patient.imageUrl}}" alt=""
                                          class="img-responsive" />
                                 </div>
                             </div>
@@ -56,19 +39,19 @@
                                 <tbody>
                                     <tr>
                                         <td>User Name</td>
-                                        <td>John Doe</td>
+                                        <td>{{patient.name}} {{patient.surname}}</td>
                                     </tr>
                                     <tr>
                                         <td>Email</td>
-                                        <td>name@example.com</td>
+                                        <td>{{patient.email}}</td>
                                     </tr>
                                     <tr>
                                         <td>Address</td>
-                                        <td>Street 123, Avenue 45, Country</td>
+                                        <td>{{patient.homeAddress}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Status</td>
-                                        <td><span class="label label-success">Active</span></td>
+                                        <td>DateOfBirth</td>
+                                        <td>{{patient.dateOfBirth}}</td>
                                     </tr>
                                     <tr>
                                         <td>User Rating</td>
@@ -77,8 +60,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Member Since</td>
-                                        <td> Jun 03, 2014</td>
+                                        <td>Patient ID</td>
+                                        <td>{{patient.patientID}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -138,149 +121,115 @@
                     <div class="panel">
 
                         <div class="panel-body pan">
-                            <form>
-                                <div class="form-body pal">
 
-                                    <div class="panel-heading">
-                                        Appointment
-                                    </div>
-                                    <div class="panel-body pan">
-                                        <form action="#">
-                                            <div class="form-body pal">
-                                                <div class="form-group">
-                                                    <label for="inputMessage" class="control-label">
-                                                        Problem Brief
-                                                    </label>
-                                                    <textarea rows="5"
-                                                              class="form-control"></textarea>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="inputName"
-                                                                   class="control-label">
-                                                                AppoinmentDate
-                                                            </label>
-                                                            <div class="input-icon right">
-                                                                <input id="inputName" type="date"
-                                                                       placeholder=""
-                                                                       class="form-control" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="inputEmail"
-                                                                   class="control-label">
-                                                                Age
-                                                            </label>
-                                                            <div class="input-icon right">
-                                                                <input id="inputEmail" type="number"
-                                                                       placeholder=""
-                                                                       class="form-control" />
-                                                            </div>
+                            <div class="form-body pal">
+
+                                <div class="panel-heading">
+                                    Appointment
+                                </div>
+                                <div class="panel-body pan">
+                                    <form>
+                                        <div class="form-body pal">
+                                            <div class="form-group">
+                                                <label for="inputMessage" class="control-label">
+                                                    Problem Brief
+                                                </label>
+                                                <textarea rows="2"
+                                                          class="form-control"></textarea>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="inputName"
+                                                               class="control-label">
+                                                            AppoinmentDate
+                                                        </label>
+                                                        <div class="input-icon right">
+                                                            <input id="inputName" type="date"
+                                                                   placeholder=""
+                                                                   class="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="inputSubject" class="control-label">
-                                                        Patient ID
-                                                    </label>
-                                                    <div class="input-icon right">
-                                                        <input id="inputSubject" type="text"
-                                                               placeholder="" class="form-control" />
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="inputEmail"
+                                                               class="control-label">
+                                                            Age
+                                                        </label>
+                                                        <div class="input-icon right">
+                                                            <input id="inputEmail" type="number"
+                                                                   placeholder=""
+                                                                   class="form-control" />
+                                                        </div>
                                                     </div>
                                                 </div>
+                                            </div>
 
+                                            <div  class="form-group">
                                                 <div>
-                                                    <div>
-                                                        <div class="form-group">
+                                                    <div class="form-group">
+                                                        <p>
+                                                            Selected person: {{ person | json }}
+                                                        </p>
+                                                        <label for="inputSubject" class="control-label">
+                                                            Doctor
+                                                        </label>
 
-                                                            <p>
-                                                                Selected person: {{ person | json }}
-                                                            </p>
-                                                            <label for="inputSubject" class="control-label">
-                                                                Doctor
-                                                            </label>
-
-                                                            <div class="input-icon right" custom-select="t as t.name for t in people | filter: { name: $searchTerm }"
-                                                                 ng-model="person">
-                                                                <div class="pull-left form-control" style="width: 40px">
-                                                                    <img ng-src="{{ t.picture }}" style="width: 30px" />
-                                                                </div>
-                                                                <div class="pull-left">
-                                                                    <strong>{{ t.name }}</strong><br />
-                                                                    <span>{{ t.phone }}</span>
-                                                                </div>
-                                                                <div class="clearfix"></div>
+                                                        <div class="input-icon right" custom-select="t as t.name for t in people | filter: { name: $searchTerm }"
+                                                             ng-model="person">
+                                                            <div class="pull-left form-control" style="width: 40px">
+                                                                <img ng-src="{{ t.picture }}" style="width: 30px" />
                                                             </div>
+                                                            <div class="pull-left">
+                                                                <strong>{{ t.name }}</strong><br />
+                                                                <span>{{ t.phone }}</span>
+                                                            </div>
+                                                            <div class="clearfix"></div>
                                                         </div>
                                                     </div>
                                                 </div>
-
-
                                             </div>
-                                            <div class="form-actions text-right pal">
-                                                <button type="submit" class="btn btn-primary">
-                                                    Send message
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
 
 
-
+                                        </div>
+                                        <div class="form-actions text-right pal">
+                                            <button type="submit" class="btn btn-primary">
+                                                Send message
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
 
-                            </form>
+
+
+                            </div>
+
                         </div>
                         <div class="panel panel-green">
                             <div class="panel-heading">Appointment Histry</div>
                             <div class="panel-body">
-                                <table class="table table-hover table-bordered">
+                                <label>Search:</label>
+                                <input type="text" ng-model="search" />
+                                <table class="table table-hover table-bordered" ng-show="apoinmentslist">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Username</th>
+                                            <th>TimeSlot</th>
                                             <th>Age</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Henry</td>
-                                            <td>23</td>
-                                            <td>
-                                                <span class="label label-sm label-success">Approved</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>John</td>
-                                            <td>45</td>
-                                            <td>
-                                                <span class="label label-sm label-info">Pending</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>30</td>
-                                            <td>
-                                                <span class="label label-sm label-warning">Suspended</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Lahm</td>
-                                            <td>15</td>
-                                            <td>
-                                                <span class="label label-sm label-danger">Blocked</span>
-                                            </td>
+                                        <tr ng-repeat="item in apoinmentslist |filter:search ">
+                                            <td ng-bind="item.appoinmentsID "></td>
+                                            <td ng-bind="item.timeSlot "></td>
+                                            <td ng-bind="item.age "></td>
+                                            <td ng-bind="item.appoinmentsStatus "></td>
                                         </tr>
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
 
@@ -288,8 +237,8 @@
 
                 </div>
             </div>
-
         </div>
+
     </div>
         <!-- basic scripts -->
         <!--[if !IE]> -->
@@ -304,141 +253,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
         <script src="~/js/customSelect.js"></script>
         <script src="~/js/app_Appointment.js"></script>
-        @*<script>
-            (function () {
-                var app = angular.module('apimodule', ['AxelSoft']);
 
-                app.controller('MainCtrl', ['$scope', '$timeout', '$q', function ($scope, $timeout, $q) {
-
-                    $scope.fruits = ['apple', 'orange', 'mango', 'grapefruit', 'banana', 'melon'];
-                    $scope.setToMango = function () {
-                        $scope.fruit = 'mango';
-                    };
-
-                    $scope.state = 'AL';
-                    $scope.states = [
-                        { id: 'AL', name: 'Alabama' },
-                        { id: 'AK', name: 'Alaska' },
-                        { id: 'AS', name: 'American Samoa' },
-                        { id: 'AZ', name: 'Arizona' },
-                        { id: 'AR', name: 'Arkansas' },
-                        { id: 'CA', name: 'California' },
-                        { id: 'CO', name: 'Colorado' },
-                        { id: 'CT', name: 'Connecticut' },
-                        { id: 'DE', name: 'Delaware' },
-                        { id: 'DC', name: 'District Of Columbia' },
-                        { id: 'FM', name: 'Federated States Of Micronesia' },
-                        { id: 'FL', name: 'Florida' },
-                        { id: 'GA', name: 'Georgia' },
-                        { id: 'GU', name: 'Guam' },
-                        { id: 'HI', name: 'Hawaii' },
-                        { id: 'ID', name: 'Idaho' },
-                        { id: 'IL', name: 'Illinois' },
-                        { id: 'IN', name: 'Indiana' },
-                        { id: 'IA', name: 'Iowa' },
-                        { id: 'KS', name: 'Kansas' },
-                        { id: 'KY', name: 'Kentucky' },
-                        { id: 'LA', name: 'Louisiana' },
-                        { id: 'ME', name: 'Maine' },
-                        { id: 'MH', name: 'Marshall Islands' },
-                        { id: 'MD', name: 'Maryland' },
-                        { id: 'MA', name: 'Massachusetts' },
-                        { id: 'MI', name: 'Michigan' },
-                        { id: 'MN', name: 'Minnesota' },
-                        { id: 'MS', name: 'Mississippi' },
-                        { id: 'MO', name: 'Missouri' },
-                        { id: 'MT', name: 'Montana' },
-                        { id: 'NE', name: 'Nebraska' },
-                        { id: 'NV', name: 'Nevada' },
-                        { id: 'NH', name: 'New Hampshire' },
-                        { id: 'NJ', name: 'New Jersey' },
-                        { id: 'NM', name: 'New Mexico' },
-                        { id: 'NY', name: 'New York' },
-                        { id: 'NC', name: 'North Carolina' },
-                        { id: 'ND', name: 'North Dakota' },
-                        { id: 'MP', name: 'Northern Mariana Islands' },
-                        { id: 'OH', name: 'Ohio' },
-                        { id: 'OK', name: 'Oklahoma' },
-                        { id: 'OR', name: 'Oregon' },
-                        { id: 'PW', name: 'Palau' },
-                        { id: 'PA', name: 'Pennsylvania' },
-                        { id: 'PR', name: 'Puerto Rico' },
-                        { id: 'RI', name: 'Rhode Island' },
-                        { id: 'SC', name: 'South Carolina' },
-                        { id: 'SD', name: 'South Dakota' },
-                        { id: 'TN', name: 'Tennessee' },
-                        { id: 'TX', name: 'Texas' },
-                        { id: 'UT', name: 'Utah' },
-                        { id: 'VT', name: 'Vermont' },
-                        { id: 'VI', name: 'Virgin Islands' },
-                        { id: 'VA', name: 'Virginia' },
-                        { id: 'WA', name: 'Washington' },
-                        { id: 'WV', name: 'West Virginia' },
-                        { id: 'WI', name: 'Wisconsin' },
-                        { id: 'WY', name: 'Wyoming' }
-                    ];
-
-                    $scope.reset = function () {
-                        $scope.state = undefined;
-                    };
-
-                    $scope.isCustomEnabled = true;
-                    $scope.custom = ['Item 1', 'Item 2', 'Item 3'];
-                    $scope.customOptions = {
-                        displayText: 'This text is modifyable',
-                        emptyListText: 'Oops! The list is empty',
-                        emptySearchResultText: 'Sorry, couldn\'t find "$0"'
-                    };
-
-                    $scope.growable = ['Item 1', 'Item 2', 'Item 3'];
-                    $scope.growableOptions = {
-                        displayText: 'Select or add a new item...',
-                        addText: 'Add new item',
-                        onAdd: function (text) {
-                            var newItem = 'Item ' + text;
-                            $scope.growable.push(newItem);
-                            return newItem;
-                        }
-                    };
-
-                    $scope.searchAsync = function (term) {
-                        // No search term: return initial items
-                        if (!term) {
-                            return ['Item 1', 'Item 2', 'Item 3'];
-                        }
-                        var deferred = $q.defer();
-                        $timeout(function () {
-                            var result = [];
-                            for (var i = 1; i <= 3; i++) {
-                                result.push(term + ' ' + i);
-                            }
-                            deferred.resolve(result);
-                        }, 300);
-                        return deferred.promise;
-                    };
-
-                    $scope.people = [
-                        { name: 'John Doe', phone: '555-123-456', picture: 'http://www.saintsfc.co.uk/images/common/bg_player_profile_default_big.png' },
-                        { name: 'Axel Zarate', phone: '888-777-6666', picture: 'https://avatars0.githubusercontent.com/u/4431445?s=60' },
-                        { name: 'Walter White', phone: '303-111-2222', picture: 'http://upstreamideas.org/wp-content/uploads/2013/10/ww.jpg' }
-                    ];
-
-                    $scope.nestedItemsLevel1 = ['Item 1', 'Item 2', 'Item 3'];
-                    $scope.level1Options = {
-                        onSelect: function (item) {
-                            var items = [];
-                            for (var i = 1; i <= 5; i++) {
-                                items.push(item + ': ' + 'Nested ' + i);
-                            }
-                            $scope.nestedItemsLevel2 = items;
-                        }
-                    };
-
-                    $scope.nestedItemsLevel2 = [];
-                }]);
-
-            })();
-        </script>*@
-</body>
-</html>
+</div>
+ 
 
