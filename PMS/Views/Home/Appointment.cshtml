@@ -71,21 +71,21 @@
                             <div class="panel-body">
                                 <label>Search:</label>
                                 <input type="text" ng-model="search" />
-                                <table class="table table-hover table-bordered" ng-show="apoinmentslist">
+                                <table class="table table-hover table-bordered" ng-show="medHistory">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>TimeSlot</th>
-                                            <th>Age</th>
-                                            <th>Status</th>
+                                            <th>PrescriptionDate</th>
+                                            <th>DoctorID</th>
+                                            <th>View</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="item in apoinmentslist |filter:search ">
-                                            <td ng-bind="item.appoinmentsID "></td>
-                                            <td ng-bind="item.timeSlot "></td>
-                                            <td ng-bind="item.age "></td>
-                                            <td ng-bind="item.appoinmentsStatus "></td>
+                                        <tr ng-repeat="item in medHistory |filter:search ">
+                                            <td ng-bind="item.prescriptionID "></td>
+                                            <td ng-bind="item.prescriptionDate "></td>
+                                            <td ng-bind="item.doctorID "></td> 
+                                            <td><span class="label label-sm label-success">View</span> </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -118,7 +118,7 @@
                                                 <label for="inputMessage" class="control-label">
                                                     Problem Brief
                                                 </label>
-                                                <textarea rows="2"
+                                                <textarea rows="2" ng-model="Patient.ProblemBrief" 
                                                           class="form-control"></textarea>
                                             </div>
                                             <div class="row">
@@ -129,7 +129,7 @@
                                                             AppoinmentDate
                                                         </label>
                                                         <div class="input-icon right">
-                                                            <input id="inputName" type="date"
+                                                            <input id="inputName" type="date" ng-model="Patient.AppoinmentDate" 
                                                                    placeholder=""
                                                                    class="form-control" />
                                                         </div>
@@ -142,7 +142,7 @@
                                                             Age
                                                         </label>
                                                         <div class="input-icon right">
-                                                            <input id="inputEmail" type="number"
+                                                            <input id="inputEmail" type="number" ng-model="Patient.Age"
                                                                    placeholder=""
                                                                    class="form-control" />
                                                         </div>
@@ -155,12 +155,8 @@
                                                         <label for="inputSubject" class="control-label">
                                                             Hospital
                                                         </label>
-                                                        <p>
-                                                            Selected person: {{ person | json }}
-                                                            Selected xxxxxxxx: {{ person.hospitalID}}
-                                                        </p>
                                                         <div class="input-icon right" custom-select="t as t.name for t in hospital | filter: { name: $searchTerm }"
-                                                             ng-model="person">
+                                                             ng-model="Patient.hospital">
                                                             <div class="pull-left">
                                                                 <strong>{{ t.name }}</strong><br />
                                                                 <span>{{t.phone }}</span>
@@ -178,7 +174,7 @@
                                                         </label>
 
                                                         <div class="input-icon right" custom-select="t as t.name for t in doctor | filter: filterExpression"  
-                                                            ng-model="selecteddoctor">       
+                                                            ng-model="Patient.doctor">       
                                                             <div class="pull-left">
                                                                 <strong>{{ t.name }}</strong><br />
                                                                 <span>{{ t.phone }}</span>
@@ -192,7 +188,7 @@
 
                                         </div>
                                         <div class="form-actions text-right pal">
-                                            <button type="submit" class="btn btn-primary">
+                                            <button ng-click="saveData()" class="btn btn-primary">
                                                 Save
                                             </button>
                                         </div>
