@@ -307,7 +307,7 @@ app.controller('MainCtrl', function ($scope, $timeout, $q, $window, $http, logse
                 var loadHospital = logservice.loadHospital($scope.traceId, 455555.2 , 455555.2, $scope.sessionKey.authKey)
                 loadHospital.then(function (d) {
 
-                    console.log("Succss loadHospital- ", d.data);
+                    
 
                     $scope.hospital = [];
 
@@ -331,13 +331,17 @@ app.controller('MainCtrl', function ($scope, $timeout, $q, $window, $http, logse
                         var name = d.data[i].hospitalName;
                         var phone = d.data[i].telephoneNumber;
                         var hospitalID = d.data[i].hospitalID;
+                        var address = d.data[i].hospitalAddress;
+                        var feedback = d.data[i].positiveFeedbacks;
                         $scope.hospital.push({
                             name: name,
                             phone: phone,
-                            hospitalID: hospitalID
+                            hospitalID: hospitalID,
+                            address: address,
+                            feedback: feedback
                         });
                     }
-
+                    console.log("Succss loadHospital- ", $scope.hospital);
                     
                     
                    // person
@@ -345,28 +349,27 @@ app.controller('MainCtrl', function ($scope, $timeout, $q, $window, $http, logse
                     $scope.doctor = [];
                     var loadDoc = logservice.loadDoctor($scope.traceId, 0 , $scope.sessionKey.authKey)
                     loadDoc.then(function (d) {
-
-                        console.log("Succss - ", d.data);
+                         
 
                         var len = d.data.length;
-                        console.log("length", d.data.length);
-
-
+                     
 
                         for (var i = 0; i < len; i++) {
-
                             var name = d.data[i].name;
                             var phone = d.data[i].mobileNumber;
-                            var hospitalID = d.data[i].hospitalID;
+                            var department = d.data[i].department;
+                            var hospitalxID = d.data[i].hospitalID;
                             var DoctorDataID = d.data[i].doctorDataID;
                             $scope.doctor.push({
                                 name: name,
                                 phone: phone,
-                                hospitalID: hospitalID,
+                                department: department,
+                                hospitalID: hospitalxID,
                                 doctorID: DoctorDataID
                             });
                         }
-                          
+                        console.log("Succss loadHospital- ", $scope.doctor);
+
                     }, function (error) {
                         console.log("Oops! Something went wrong while fetching the data.");
                     });
