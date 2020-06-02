@@ -34,10 +34,12 @@ app.controller('APIController', function ($scope, $http, $window,logservice) {
             console.log("Done", d.data);
             console.log(d.data.authenticationKey);
             $scope.param = d.data.authenticationKey;
+            $scope.userType = d.data.userType
             //$window.open('/Home/Index');
             var sessionKey = {
                 UserName: $scope.UserName,
                 Password: $scope.Password,
+                UserType: $scope.userType,
                 AuthKey: $scope.param 
             }
             var JsonString = JSON.stringify(sessionKey);
@@ -46,7 +48,7 @@ app.controller('APIController', function ($scope, $http, $window,logservice) {
 
             //$http.post('/Home/Index', JsonString);
 
-            var url = '/Home/Index?UserName=' + $scope.UserName + "&Password=" + $scope.Password + "&AuthKey=" + $scope.param 
+            var url = '/Home/Index?UserName=' + $scope.UserName + "&Password=" + $scope.Password + "&AuthKey=" + $scope.param + "&UserType=" + $scope.userType
             window.open(url, "_self");
 
         }, function (error) {

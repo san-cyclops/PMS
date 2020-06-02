@@ -23,8 +23,8 @@ namespace PMS.Models
 	    public string Password { get; set; }
 
         public string AuthKey { get; set; }
+        public string UserType { get; set; }
 
-       
 
     }
     public static class SessionExtensions

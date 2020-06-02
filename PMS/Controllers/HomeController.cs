@@ -17,12 +17,14 @@ namespace PMS.Controllers
     {
         const string SessionKey = "_AuthKey";
 
-        public IActionResult Index(string UserName,string Password,string AuthKey) 
+        public IActionResult Index(string UserName,string Password,string AuthKey,string UserType) 
         {
             SessionKey sessionKey = new SessionKey();
             sessionKey.UserName = UserName;
             sessionKey.Password = Password;
             sessionKey.AuthKey = AuthKey;
+            sessionKey.UserType = UserType;
+
 
             string strjson = JsonConvert.SerializeObject(sessionKey);
              
@@ -30,7 +32,7 @@ namespace PMS.Controllers
 
             TempData["sessionKey"] = strjson;
             TempData["username"] = UserName;
-            return View();
+            return View(sessionKey);
         }
         public IActionResult Login()
         { 
