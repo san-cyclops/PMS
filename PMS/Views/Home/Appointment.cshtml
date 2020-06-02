@@ -67,54 +67,38 @@
                             </table>
                         </div>
                         <div class="panel panel-green">
-                            <div class="panel-heading">Medical History</div>
+                            <div class="panel-heading">Medical Histry</div>
                             <div class="panel-body">
-                                <table class="table table-hover table-bordered">
+                                <label>Search:</label>
+                                <input type="text" ng-model="search" />
+                                <table class="table table-hover table-bordered" ng-show="apoinmentslist">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Username</th>
+                                            <th>TimeSlot</th>
                                             <th>Age</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Henry</td>
-                                            <td>23</td>
-                                            <td>
-                                                <span class="label label-sm label-success">Approved</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>John</td>
-                                            <td>45</td>
-                                            <td>
-                                                <span class="label label-sm label-info">Pending</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>30</td>
-                                            <td>
-                                                <span class="label label-sm label-warning">Suspended</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Lahm</td>
-                                            <td>15</td>
-                                            <td>
-                                                <span class="label label-sm label-danger">Blocked</span>
-                                            </td>
+                                        <tr ng-repeat="item in apoinmentslist |filter:search ">
+                                            <td ng-bind="item.appoinmentsID "></td>
+                                            <td ng-bind="item.timeSlot "></td>
+                                            <td ng-bind="item.age "></td>
+                                            <td ng-bind="item.appoinmentsStatus "></td>
                                         </tr>
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
+
+
+
+
+
+
+
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -165,22 +149,36 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div  class="form-group">
+                                            <div class="form-group">
                                                 <div>
                                                     <div class="form-group">
+                                                        <label for="inputSubject" class="control-label">
+                                                            Hospital
+                                                        </label>
                                                         <p>
                                                             Selected person: {{ person | json }}
+                                                            Selected xxxxxxxx: {{ person.hospitalID}}
                                                         </p>
+                                                        <div class="input-icon right" custom-select="t as t.name for t in hospital | filter: { name: $searchTerm }"
+                                                             ng-model="person">
+                                                            <div class="pull-left">
+                                                                <strong>{{ t.name }}</strong><br />
+                                                                <span>{{t.phone }}</span>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div>
+                                                    <div class="form-group">
                                                         <label for="inputSubject" class="control-label">
                                                             Doctor
                                                         </label>
 
-                                                        <div class="input-icon right" custom-select="t as t.name for t in people | filter: { name: $searchTerm }"
-                                                             ng-model="person">
-                                                            <div class="pull-left form-control" style="width: 40px">
-                                                                <img ng-src="{{ t.picture }}" style="width: 30px" />
-                                                            </div>
+                                                        <div class="input-icon right" custom-select="t as t.name for t in doctor | filter: filterExpression"  
+                                                            ng-model="selecteddoctor">       
                                                             <div class="pull-left">
                                                                 <strong>{{ t.name }}</strong><br />
                                                                 <span>{{ t.phone }}</span>
@@ -195,7 +193,7 @@
                                         </div>
                                         <div class="form-actions text-right pal">
                                             <button type="submit" class="btn btn-primary">
-                                                Send message
+                                                Save
                                             </button>
                                         </div>
                                     </form>

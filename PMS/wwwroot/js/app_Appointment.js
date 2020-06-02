@@ -47,6 +47,23 @@ app.service('logservice', function ($http) {
             url: "https://localhost:5001/EHealthCareAPI/Appoinment/" + traceId + "/" + id + "/" + authkey 
         });
     };
+    this.loadHospital = function (traceId,lat,lot, authkey) {
+        console.log("https://localhost:5001/EHealthCareAPI/Patient/" + traceId + "/" + lat +"/" + lot+ "/" +  authkey);
+        return $http({
+            method: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: "https://localhost:5001/EHealthCareAPI/Patient/" + traceId + "/" + lat + "/" + lot + "/" + authkey
+        });
+    };
+    this.loadDoctor = function (traceId, hospitalID, authkey) {
+        console.log("https://localhost:5001/EHealthCareAPI/Doctor/" + traceId + "/" + hospitalID + "/" + authkey);
+        return $http({
+            method: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: "https://localhost:5001/EHealthCareAPI/Doctor/" + traceId + "/" + hospitalID + "/" + authkey
+        });
+    };
+    
 });
 
 
@@ -234,7 +251,7 @@ app.controller('MainCtrl', function ($scope, $timeout, $q, $window, $http, logse
 
                 $scope.id = d.data.patientDetails.patientID;
 
-
+                console.log("loadApiment -----");
                 var loadApiment = logservice.loadapoinments($scope.traceId, $scope.id, $scope.sessionKey.authKey)
                 loadApiment.then(function (d) {
 
@@ -247,12 +264,89 @@ app.controller('MainCtrl', function ($scope, $timeout, $q, $window, $http, logse
                         addressCollection.push(d.data[i]);
                     }
                     $scope.apoinmentslist = addressCollection;
-
-                    console.log("xxxxxxxx - ", apoinmentslist );
                     vm.model = {};
                 }, function (error) {
                     console.log("Oops! Something went wrong while fetching the data.");
                 });
+
+                console.log("loadHospital -----");
+                var loadHospital = logservice.loadHospital($scope.traceId, 455555.2 , 455555.2, $scope.sessionKey.authKey)
+                loadHospital.then(function (d) {
+
+                    console.log("Succss loadHospital- ", d.data);
+
+                    $scope.hospital = [];
+
+                    var len = d.data.length;
+   
+
+                    //distance: 3835494.584969937
+                    //email: "athurugiriyaHospital@gov.lk"
+                    //hospitalAddress: "102 Kaduwela - Athurugiriya Road, Colombo"
+                    //hospitalID: 1000
+                    //hospitalName: "Athurugiriya Hospital"
+                    //latitude: 0
+                    //longitude: 0
+                    //negativeFeedbacks: 2
+                    //positiveFeedbacks: 5
+                    //telephoneNumber: "0112561229"
+                    
+
+                    for (var i = 0; i < len; i++) {
+                   
+                        var name = d.data[i].hospitalName;
+                        var phone = d.data[i].telephoneNumber;
+                        var hospitalID = d.data[i].hospitalID;
+                        $scope.hospital.push({
+                            name: name,
+                            phone: phone,
+                            hospitalID: hospitalID
+                        });
+                    }
+
+                    
+                    
+                   // person
+                    //loadDoc ----------------------------
+                    $scope.doctor = [];
+                    var loadDoc = logservice.loadDoctor($scope.traceId, 0 , $scope.sessionKey.authKey)
+                    loadDoc.then(function (d) {
+
+                        console.log("Succss - ", d.data);
+
+                        var len = d.data.length;
+                        console.log("length", d.data.length);
+
+
+
+                        for (var i = 0; i < len; i++) {
+
+                            var name = d.data[i].name;
+                            var phone = d.data[i].mobileNumber;
+                            var hospitalID = d.data[i].hospitalID;
+                            $scope.doctor.push({
+                                name: name,
+                                phone: phone,
+                                hospitalID: hospitalID
+                            });
+                        }
+                          
+ 
+
+                    }, function (error) {
+                        console.log("Oops! Something went wrong while fetching the data.");
+                    });
+                   
+                    $scope.filterExpression = function (doctor) {
+                        return (doctor.hospitalID === $scope.person.hospitalID);
+                    };
+ 
+
+                }, function (error) {
+                    console.log("Oops! Something went wrong while fetching the data.");
+                });
+
+
 
 
  
@@ -261,14 +355,15 @@ app.controller('MainCtrl', function ($scope, $timeout, $q, $window, $http, logse
             });
 
             //Load Apoinments---------------------------------------------
- 
+  
+        },
+        loadDoctor = function () {
 
            
 
-
-
-
         };
+ 
+
 
     // view model attached click handlers
     vm.addClickHandler = function () {
@@ -289,10 +384,10 @@ app.controller('MainCtrl', function ($scope, $timeout, $q, $window, $http, logse
     vm.pageLoad = function () {
         load();
     };
+    vm.loadDoctorSelected = function () {
+        loadDoctor();
+    };
+
     vm.pageLoad();
-    $scope.people = [
-        { name: 'John Doe', phone: '555-123-456', picture: 'http://www.saintsfc.co.uk/images/common/bg_player_profile_default_big.png' },
-        { name: 'Axel Zarate', phone: '888-777-6666', picture: 'https://avatars0.githubusercontent.com/u/4431445?s=60' },
-        { name: 'Walter White', phone: '303-111-2222', picture: 'http://upstreamideas.org/wp-content/uploads/2013/10/ww.jpg' }
-    ];
+   
 });

@@ -145,10 +145,10 @@
 					focusedIndex = -1;
 					inputElement.focus();
 
-					// If filter is not async, perform search in case model changed
-					//if (!options.async) {
-					//	getMatches();
-					//}
+					//If filter is not async, perform search in case model changed
+					if (!options.async) {
+						getMatches();
+					}
 				});
 				
 				if (dependsOn) {
