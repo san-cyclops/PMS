@@ -529,7 +529,7 @@ app.controller('MainCtrl', function ($scope, $timeout, $q, $window, $http, logse
 
                         console.log("Succss");
                         console.log("NewSAVE-----PERSON", d.data);
-                        $scope.Patient""; 
+                        $scope.Patient = ""; 
 
                     }, function (error) {
                         console.log("Oops! Something went wrong while fetching the data.");
