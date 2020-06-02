@@ -358,10 +358,12 @@ app.controller('MainCtrl', function ($scope, $timeout, $q, $window, $http, logse
                             var name = d.data[i].name;
                             var phone = d.data[i].mobileNumber;
                             var hospitalID = d.data[i].hospitalID;
+                            var DoctorDataID = d.data[i].doctorDataID;
                             $scope.doctor.push({
                                 name: name,
                                 phone: phone,
-                                hospitalID: hospitalID
+                                hospitalID: hospitalID,
+                                doctorID: DoctorDataID
                             });
                         }
                           
@@ -509,7 +511,7 @@ app.controller('MainCtrl', function ($scope, $timeout, $q, $window, $http, logse
                             PatientMasterDataID: $scope.id
                         },
                         Doctor: {
-                            DoctorID: $scope.Patient.hospital.hospitalID
+                            DoctorID: $scope.Patient.doctor.doctorID
                         }, 
                         Hospital: {
                             HospitalID: $scope.Patient.hospital.hospitalID
@@ -527,7 +529,7 @@ app.controller('MainCtrl', function ($scope, $timeout, $q, $window, $http, logse
 
                         console.log("Succss");
                         console.log("NewSAVE-----PERSON", d.data);
-                        //addressCollection.push(savejson);
+                        $scope.Patient""; 
 
                     }, function (error) {
                         console.log("Oops! Something went wrong while fetching the data.");
@@ -536,8 +538,7 @@ app.controller('MainCtrl', function ($scope, $timeout, $q, $window, $http, logse
 
                 }
 
-                vm.addresses = addressCollection;
-                vm.model = {};
+            
             
         }
     }
