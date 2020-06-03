@@ -1,13 +1,46 @@
-﻿@{
+﻿@model PMS.Models.SessionKey
+@inject IJsonHelper Json;
+<script type="text/javascript">
+    var SessionKey = @Html.Raw(@Json.Serialize(Model));
+</script>
+@{
     ViewData["Title"] = "Home Page";
 }
+<div ng-app="APIModule">
+    <div ng-controller="APIController">
+        <div id="wrapper">
+            <!--BEGIN SIDEBAR MENU-->
 
-@{
-    ViewBag.Title = "My Website Pagesssssssssssssssssssssssss";
-}
+            @Html.Partial("_MainMenu")
 
-<section class="content-header">
-</section>
-<!-- Main content -->
-<section class="content container-fluid">
-</section>
+
+            <div id="page-wrapper">
+                <!--BEGIN TITLE & BREADCRUMB PAGE-->
+                <!--SUB TITLE -- SANJEEWA-->
+                <!--END TITLE & BREADCRUMB PAGE-->
+                <!--BEGIN CONTENT-->
+                <div class="page-content">
+                    <div id="tab-general">
+                        <div class="row mbl">
+                            <div class="col-lg-12">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--END CONTENT-->
+                <!--BEGIN FOOTER-->
+                <div id="footer">
+                    <div class="copyright">
+                        <a href="#">2014 © x</a>
+                    </div>
+                </div>
+                <!--END FOOTER-->
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="https://code.angularjs.org/1.5.8/angular.js"></script>
+<script src="~/js/protractor.js"></script>
+<script src="~/js/app_Index.js"></script>

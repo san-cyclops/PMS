@@ -32,24 +32,30 @@ app.controller('APIController', function ($scope, $http, $window,logservice) {
         var servCall = logservice.getList(sub);
         servCall.then(function (d) {
             console.log("Done", d.data);
-            console.log(d.data.authenticationKey);
-            $scope.param = d.data.authenticationKey;
-            $scope.userType = d.data.userType
-            //$window.open('/Home/Index');
-            var sessionKey = {
-                UserName: $scope.UserName,
-                Password: $scope.Password,
-                UserType: $scope.userType,
-                AuthKey: $scope.param 
+            if (!d.data.authenticationKey) {
+                alert(d.data.error);
             }
-            var JsonString = JSON.stringify(sessionKey);
+            else {
 
-            console.log("sessionKey", JsonString);
+                console.log(d.data.authenticationKey);
+                $scope.param = d.data.authenticationKey;
+                $scope.userType = d.data.userType
+                //$window.open('/Home/Index');
+                var sessionKey = {
+                    UserName: $scope.UserName,
+                    Password: $scope.Password,
+                    UserType: $scope.userType,
+                    AuthKey: $scope.param
+                }
+                var JsonString = JSON.stringify(sessionKey);
 
-            //$http.post('/Home/Index', JsonString);
+                console.log("sessionKey", JsonString);
 
-            var url = '/Home/Index?UserName=' + $scope.UserName + "&Password=" + $scope.Password + "&AuthKey=" + $scope.param + "&UserType=" + $scope.userType
-            window.open(url, "_self");
+                //$http.post('/Home/Index', JsonString);
+
+                var url = '/Home/Index?UserName=' + $scope.UserName + "&Password=" + $scope.Password + "&AuthKey=" + $scope.param + "&UserType=" + $scope.userType
+                window.open(url, "_self");
+            }
 
         }, function (error) {
             console.log("Oops! Something went wrong while fetching the data.");

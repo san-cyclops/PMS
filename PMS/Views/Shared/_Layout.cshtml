@@ -95,37 +95,7 @@
             <!--END MODAL CONFIG PORTLET-->
         </div>
         <!--END TOPBAR-->
-        <div id="wrapper">
-            <!--BEGIN SIDEBAR MENU-->
-
-            @Html.Partial("_MainMenu")
-
-
-            <div id="page-wrapper">
-                <!--BEGIN TITLE & BREADCRUMB PAGE-->
-                <!--SUB TITLE -- SANJEEWA-->
-                <!--END TITLE & BREADCRUMB PAGE-->
-                <!--BEGIN CONTENT-->
-                <div class="page-content">
-                    <div id="tab-general">
-                        <div class="row mbl">
-                            <div class="col-lg-12">
-                                @RenderBody()
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--END CONTENT-->
-                <!--BEGIN FOOTER-->
-                <div id="footer">
-                    <div class="copyright">
-                        <a href="#">2014 © x</a>
-                    </div>
-                </div>
-                <!--END FOOTER-->
-            </div>
-
-        </div>     
+        @RenderBody()
     </div>
     <script src="~/script/jquery-1.10.2.min.js"></script>
     <script src="~/script/jquery-migrate-1.2.1.min.js"></script>

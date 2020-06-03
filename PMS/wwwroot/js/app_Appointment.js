@@ -1,4 +1,4 @@
-﻿var app = angular.module('apimodule', ['AxelSoft']);
+﻿var app = angular.module('APIModule', ['AxelSoft']);
 
 app.service('logservice', function ($http) {
     this.save = function (sub) {
@@ -76,7 +76,7 @@ app.service('logservice', function ($http) {
 
 
 
-app.controller('MainCtrl', function ($scope, $timeout, $q, $window, $http, logservice) {
+app.controller('APIController', function ($scope, $timeout, $q, $window, $http, logservice) {
 
     let vm = this,
         addressCollection = [],
@@ -447,6 +447,16 @@ app.controller('MainCtrl', function ($scope, $timeout, $q, $window, $http, logse
     vm.loadDoctorSelected = function () {
         loadDoctor();
     };
+
+    $scope.valuePatient = false;
+    $scope.sessionKey = $window.SessionKey;
+
+    console.log("sessionKeyMAINMENU", $scope.sessionKey);
+
+    if ($scope.sessionKey.userType === "patient") {
+        $scope.valuePatient = true;
+    }
+    console.log("value----", $scope.valuePatient);
 
     vm.pageLoad();
 

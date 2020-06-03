@@ -3,114 +3,43 @@
 <script type="text/javascript">
     var SessionKey = @Html.Raw(@Json.Serialize(Model));
 </script>
-<div ng-app="APIModuleMenu">
-    <div ng-controller="APIControllerMenu">
+
+<link rel="stylesheet" href="~/css/style.css" />
+
+
         <nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
              data-position="right" class="navbar-default navbar-static-side">
             <div class="sidebar-collapse menu-scroll">
-                <ul id="side-menu" class="nav">
+                <div id="template1" ng-cloak ng-show="valuePatient">
+                    <ul id="side-menu" class="nav">
 
-                    <div class="clearfix"></div>
-                    <li>
-                        <a href="@Url.Action("Patient", "Home")">
-                            <i class="fa fa-tachometer fa-fw">
-                                <div class="icon-bg bg-orange"></div>
-                            </i><span class="menu-title">Patient</span>
-                            <div>
-                                {{sessionKey}}
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("Appointment", "Home")">
-                            <i class="fa fa-desktop fa-fw">
-                                <div class="icon-bg bg-pink"></div>
-                            </i><span class="menu-title">Appointment</span>
-                        </a>
+                        <div class="clearfix"></div>
+                        <li>
+                            <a href="@Url.Action("Patient", "Home")">
+                                <i class="fa fa-tachometer fa-fw">
+                                    <div class="icon-bg bg-orange"></div>
+                                </i><span class="menu-title">Patient</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Appointment", "Home")">
+                                <i class="fa fa-desktop fa-fw">
+                                    <div class="icon-bg bg-pink"></div>
+                                </i><span class="menu-title">Appointment</span>
+                            </a>
 
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-send-o fa-fw">
-                                <div class="icon-bg bg-green"></div>
-                            </i><span class="menu-title">Medical History </span>
-                        </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-send-o fa-fw">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Medical History </span>
+                            </a>
 
-                    </li>
+                        </li>
 
-                </ul>
+                    </ul>
+                </div>
             </div>
         </nav>
-    </div>
-</div>
-<script src="https://code.angularjs.org/1.5.8/angular.js"></script>
-<script>
-
-    var app = angular.module('APIModuleMenu', []);
-
-    app.service('logservicemenu', function ($http) {
-        this.getList = function (sub) {
-            return $http({
-                method: "POST",
-                contentType: "application/json; charset=utf-8",
-                data: sub,
-                url: "https://localhost:5001/EHealthCareAPI/Token"
-
-            });
-        };
-
-    });
-
-
-    app.controller('APIControllerMenu', function ($scope, $http, $window, logservicemenu) {
-
-        $scope.UserName = 'amilaprageeth@gmail.com';
-        $scope.Password = '123';
-
-        $scope.sessionKey = $window.SessionKey;
-        console.log("sessionKey", $scope.sessionKey);
-
-        $scope.login = function () {
-
-
-            var sub = {
-                userName: $scope.UserName,
-                password: $scope.Password,
-                userType: "string",
-                userStatus: true,
-                traceId: "string"
-            }
-            var servCall = logservice.getList(sub);
-            servCall.then(function (d) {
-                console.log("Done", d.data);
-                console.log(d.data.authenticationKey);
-                $scope.param = d.data.authenticationKey;
-                //$window.open('/Home/Index');
-                var sessionKey = {
-                    UserName: $scope.UserName,
-                    Password: $scope.Password,
-                    AuthKey: $scope.param
-                }
-                var JsonString = JSON.stringify(sessionKey);
-
-                console.log("sessionKey", JsonString);
-
-                //$http.post('/Home/Index', JsonString);
-
-                var url = '/Home/Index?UserName=' + $scope.UserName + "&Password=" + $scope.Password + "&AuthKey=" + $scope.param
-                window.open(url, "_self");
-
-            }, function (error) {
-                console.log("Oops! Something went wrong while fetching the data.");
-            });
-
-
-        };
-
-
-
-
-    });
-
-
-</script>
+  
