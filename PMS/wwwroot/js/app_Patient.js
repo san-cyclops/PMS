@@ -1,4 +1,4 @@
-﻿var app = angular.module('apimodule', []);
+﻿var app = angular.module('APIModule', []);
 
 app.service('logservice', function ($http) {
     this.save = function (sub) {
@@ -45,7 +45,7 @@ app.service('logservice', function ($http) {
 
 
 
-app.controller('MainCtrl', function ($scope, $window, $http, logservice) {
+app.controller('APIController', function ($scope, $window, $http, logservice) {
 
     let vm = this,
         addressCollection = [],
@@ -207,13 +207,25 @@ app.controller('MainCtrl', function ($scope, $window, $http, logservice) {
 
                 console.log("Succss - ", d.data);
 
-                var len = d.data.length;
-                console.log("length", d.data.length);
-                for (var i = 0; i < len; i++) {
-                    console.log(i, "---", d.data[i]);
-                    addressCollection.push(d.data[i]);
+                //var len = d.data.patientDetails.length;
+
+                $scope.patient = {
+                    Surname: d.data.patientDetails.patientData.surname,
+                    Name: d.data.patientDetails.patientData.name,
+                    DateOfBirth: d.data.patientDetails.patientData.dateOfBirth,
+                    Gender: d.data.patientDetails.patientData.gender,
+                    HomeAddress: d.data.patientDetails.patientData.homeAddress,
+                    WorkAdderss: d.data.patientDetails.patientData.workAdderss,
+                    MobileNumber: d.data.patientDetails.patientData.mobileNumber,
+                    HomeNumber: d.data.patientDetails.patientData.homeNumber,
+                    Depentes: d.data.patientDetails.patientData.depentes,
+                    ImageUrl: d.data.patientDetails.patientData.imageUrl,
+                    Email: d.data.patientDetails.patientData.email,
+                    OfficeEmail: d.data.patientDetails.patientData.officeEmail,
+                    ID: d.data.patientDetails.patientID,
+                    Alias: d.data.patientDetails.patientData.alias
                 }
-                vm.addresses = addressCollection;
+                 
                 vm.coursetype = {};
             }, function (error) {
                 console.log("Oops! Something went wrong while fetching the data.");
@@ -242,5 +254,17 @@ app.controller('MainCtrl', function ($scope, $window, $http, logservice) {
     vm.pageLoad = function () {
         load();
     };
+
+
+    $scope.valuePatient = false;
+    $scope.sessionKey = $window.SessionKey;
+
+    console.log("sessionKeyMAINMENU", $scope.sessionKey);
+
+    if ($scope.sessionKey.userType === "patient") {
+        $scope.valuePatient = true;
+    }
+    console.log("value----", $scope.valuePatient);
+
     vm.pageLoad();
 });

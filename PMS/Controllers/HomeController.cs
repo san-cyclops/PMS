@@ -68,6 +68,17 @@ namespace PMS.Controllers
             return View(sessionKey);
         }
 
+        public IActionResult MedHistory()
+        {
+            SessionKey sessionKey = new SessionKey();
+            sessionKey = HttpContext.Session.GetObjectFromJson<SessionKey>("SessionKey");
+
+            //string vt = TempData["sessionKey"].ToString();
+            //sessionKey = JsonConvert.DeserializeObject<SessionKey>(vt);
+            TempData["username"] = sessionKey.UserName;
+            return View(sessionKey);
+        }
+          
         [HttpPost]
         public string GetUserRS(string userName, string password)
         {

@@ -1,197 +1,238 @@
 ﻿@model PMS.Models.SessionKey
 @inject IJsonHelper Json;
-@{
-    ViewData["Title"] = "Patient";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 <script type="text/javascript">
     var SessionKey = @Html.Raw(@Json.Serialize(Model));
 </script>
-<div class="panel panel-orange" ng-app="apimodule">
-    <div class="panel-heading">
-        Patient
-    </div>
-    <div class="panel-body pan" ng-controller="MainCtrl as main">
-        <form>
-            <div class="form-body pal">
-                <div class="form-group" hidden>
-                    <label for="inputName" class="control-label">
-                        ID
-                    </label>
-                    <div class="input-icon right">
-                        <input id="inputName" ng-model="main.Patient.ID" type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputName" class="control-label">
-                        Surname
-                    </label>
-                    <div class="input-icon right">
-                        <input id="inputName" ng-model="main.Patient.Surname" type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputName" class="control-label">
-                        Name
-                    </label>
-                    <div class="input-icon right">
-                        <input id="inputName" ng-model="main.Patient.name" type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputName" class="control-label">
-                        DateOfBirth
-                    </label>
-                    <div class="input-icon right">
-                        <input id="inputEmail" ng-model="main.Patient.DateOfBirth" type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputName" class="control-label">
-                        Gender
-                    </label>
-                    <div class="input-icon right">
-                        <select class="form-control" name="Status" id="Status" ng-model="main.Patient.Gender">
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputName" class="control-label">
-                        HomeAddress
-                    </label>
-                    <div class="input-icon right">
-                        <input id="inputEmail" ng-model="main.Patient.HomeAddress" type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputName" class="control-label">
-                        WorkAdderss
-                    </label>
-                    <div class="input-icon right">
-                        <input id="inputEmail" ng-model="main.Patient.WorkAdderss" type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputName" class="control-label">
-                        MobileNumber
-                    </label>
-                    <div class="input-icon right">
-                        <input id="inputEmail" ng-model="main.Patient.MobileNumber" type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputName" class="control-label">
-                        OfficeNumber
-                    </label>
-                    <div class="input-icon right">
-                        <input id="inputEmail" ng-model="main.Patient.OfficeNumber" type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputName" class="control-label">
-                        HomeNumber
-                    </label>
-                    <div class="input-icon right">
-                        <input id="inputEmail" ng-model="main.Patient.HomeNumber" type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputName" class="control-label">
-                        DateOfBirth
-                    </label>
-                    <div class="input-icon right">
-                        <input id="inputEmail" ng-model="main.Patient.DateOfBirth" type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputName" class="control-label">
-                        ImageUrl
-                    </label>
-                    <div class="input-icon right">
-                        <input id="inputEmail" ng-model="main.Patient.ImageUrl" type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputName" class="control-label">
-                        OfficeEmail
-                    </label>
-                    <div class="input-icon right">
-                        <input id="inputEmail" ng-model="main.Patient.OfficeEmail" type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputName" class="control-label">
-                        Email
-                    </label>
-                    <div class="input-icon right">
-                        <input id="inputEmail" ng-model="main.Patient.Email" type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputName" class="control-label">
-                        Alias
-                    </label>
-                    <div class="input-icon right">
-                        <input id="inputEmail" ng-model="main.Patient.Alias" type="text" class="form-control" />
-                    </div>
-                </div>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div ng-app="APIModule">
+    <div ng-controller="APIController">
+        <div id="wrapper">
+            <!--BEGIN SIDEBAR MENU-->
+
+            @Html.Partial("_MainMenu")
+            patient
+
+            <div id="page-wrapper">
+                <!--BEGIN TITLE & BREADCRUMB PAGE-->
+                <!--SUB TITLE -- SANJEEWA-->
+                <!--END TITLE & BREADCRUMB PAGE-->
+                <!--BEGIN CONTENT-->
+                <div class="page-content">
+                    <div id="tab-general">
+                        <div class="row mbl">
+                            <div class="col-lg-12">
+
+
+                                <div class="panel panel-orange">
+                                    <div class="panel-heading">
+                                        patient
+                                    </div>
+                                    <div class="panel-body pan">
+                                        <form>
+                                            <div class="form-body pal">
+                                                <div class="form-group" hidden>
+                                                    <label for="inputName" class="control-label">
+                                                        ID
+                                                    </label>
+                                                    <div class="input-icon right">
+                                                        <input id="inputName" ng-model="patient.ID" type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName" class="control-label">
+                                                        Surname
+                                                    </label>
+                                                    <div class="input-icon right">
+                                                        <input id="inputName" ng-model="patient.Surname" type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName" class="control-label">
+                                                        Name
+                                                    </label>
+                                                    <div class="input-icon right">
+                                                        <input id="inputName" ng-model="patient.Name" type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName" class="control-label">
+                                                        DateOfBirth
+                                                    </label>
+                                                    <div class="input-icon right">
+                                                        <input id="inputEmail" ng-model="patient.DateOfBirth" type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName" class="control-label">
+                                                        Gender
+                                                    </label>
+                                                    <div class="input-icon right">
+                                                        <select class="form-control" name="Status" id="Status" ng-model="patient.Gender">
+                                                            <option value="Male">Male</option>
+                                                            <option value="Female">Female</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName" class="control-label">
+                                                        HomeAddress
+                                                    </label>
+                                                    <div class="input-icon right">
+                                                        <input id="inputEmail" ng-model="patient.HomeAddress" type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName" class="control-label">
+                                                        WorkAdderss
+                                                    </label>
+                                                    <div class="input-icon right">
+                                                        <input id="inputEmail" ng-model="patient.WorkAdderss" type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName" class="control-label">
+                                                        MobileNumber
+                                                    </label>
+                                                    <div class="input-icon right">
+                                                        <input id="inputEmail" ng-model="patient.MobileNumber" type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName" class="control-label">
+                                                        OfficeNumber
+                                                    </label>
+                                                    <div class="input-icon right">
+                                                        <input id="inputEmail" ng-model="patient.OfficeNumber" type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName" class="control-label">
+                                                        HomeNumber
+                                                    </label>
+                                                    <div class="input-icon right">
+                                                        <input id="inputEmail" ng-model="patient.HomeNumber" type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName" class="control-label">
+                                                        DateOfBirth
+                                                    </label>
+                                                    <div class="input-icon right">
+                                                        <input id="inputEmail" ng-model="patient.DateOfBirth" type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName" class="control-label">
+                                                        ImageUrl
+                                                    </label>
+                                                    <div class="input-icon right">
+                                                        <input id="inputEmail" ng-model="patient.ImageUrl" type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName" class="control-label">
+                                                        OfficeEmail
+                                                    </label>
+                                                    <div class="input-icon right">
+                                                        <input id="inputEmail" ng-model="patient.OfficeEmail" type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName" class="control-label">
+                                                        Email
+                                                    </label>
+                                                    <div class="input-icon right">
+                                                        <input id="inputEmail" ng-model="patient.Email" type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName" class="control-label">
+                                                        Alias
+                                                    </label>
+                                                    <div class="input-icon right">
+                                                        <input id="inputEmail" ng-model="patient.Alias" type="text" class="form-control" />
+                                                    </div>
+                                                </div>
 
 
 
 
+                                            </div>
+                                            <div class="form-actions text-right pal">
+                                                <button ng-click="main.addClickHandler()" class="btn btn-primary">
+                                                    Save
+                                                </button>
+                                                <button ng-click="main.resetClickHandler()" class="btn btn-primary">
+                                                    Clear Form
+                                                </button>
+                                            </div>
+
+                                            <div class="panel-body">
+                                                <label>Search:</label>
+                                                <input type="text" ng-model="main.search" />
+                                                <table class="table table-hover table-condensed" ng-show="main.addresses">
+                                                    <thead>
+                                                        <tr>
+                                                            <th hidden>#</th>
+                                                            <th>Surname</th>
+                                                            <th>Name</th>
+                                                            <th>DateOfBirth</th>
+                                                            <th>Gender</th>
+                                                            <th>HomeAddress</th>
+                                                            <th>WorkAdderss</th>
+                                                            <th>MobileNumber</th>
+                                                            <th>OfficeNumber</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="item in main.addresses |filter:main.search ">
+                                                            <td hidden ng-bind="item.ID "></td>
+                                                            <td ng-bind="item.Surname "></td>
+                                                            <td ng-bind="item.Name "></td>
+                                                            <td ng-bind="item.DateOfBirth "></td>
+                                                            <td ng-bind="item.Gender "></td>
+                                                            <td ng-bind="item.HomeAddress "></td>
+                                                            <td ng-bind="item.WorkAdderss "></td>
+                                                            <td ng-bind="item.MobileNumber "></td>
+                                                            <td ng-bind="item.OfficeNumber "></td>
+                                                            <td>
+                                                                <button class="btn btn-primary" ng-click="main.editClickHandler(item)">Edit</button>
+                                                                <button class="btn btn-danger" ng-click="main.removeClickHandler(item)">Remove</button>
+                                                            </td>
+                                                        </tr>
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--END CONTENT-->
+                <!--BEGIN FOOTER-->
+                <div id="footer">
+                    <div class="copyright">
+                        <a href="#">2014 © x</a>
+                    </div>
+                </div>
+                <!--END FOOTER-->
             </div>
-            <div class="form-actions text-right pal">
-                <button ng-click="main.addClickHandler()" class="btn btn-primary">
-                    Save
-                </button>
-                <button ng-click="main.resetClickHandler()" class="btn btn-primary">
-                    Clear Form
-                </button>
-            </div>
 
-            <div class="panel-body">
-                <label>Search:</label>
-                <input type="text" ng-model="main.search" />
-                <table class="table table-hover table-condensed" ng-show="main.addresses">
-                    <thead>
-                        <tr>
-                            <th hidden>#</th>
-                            <th>Surname</th>
-                            <th>Name</th>
-                            <th>DateOfBirth</th>
-                            <th>Gender</th>
-                            <th>HomeAddress</th>
-                            <th>WorkAdderss</th>
-                            <th>MobileNumber</th>
-                            <th>OfficeNumber</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="item in main.addresses |filter:main.search ">
-                            <td hidden ng-bind="item.ID "></td>
-                            <td ng-bind="item.Surname "></td>
-                            <td ng-bind="item.Name "></td>
-                            <td ng-bind="item.DateOfBirth "></td>
-                            <td ng-bind="item.Gender "></td>
-                            <td ng-bind="item.HomeAddress "></td>
-                            <td ng-bind="item.WorkAdderss "></td>
-                            <td ng-bind="item.MobileNumber "></td>
-                            <td ng-bind="item.OfficeNumber "></td>
-                            <td>
-                                <button class="btn btn-primary" ng-click="main.editClickHandler(item)">Edit</button>
-                                <button class="btn btn-danger" ng-click="main.removeClickHandler(item)">Remove</button>
-                            </td>
-                        </tr>
-
-
-                    </tbody>
-                </table>
-            </div>
-
-        </form>
+        </div>
     </div>
 </div>
 <script src="https://code.angularjs.org/1.5.8/angular.js"></script>
 <script src="~/js/app_Patient.js"></script>
+
+
+
+
+
