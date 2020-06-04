@@ -267,6 +267,7 @@ app.controller('APIController', function ($scope, $timeout, $q, $window, $http, 
         loadDoctor();
     };
 
+    $scope.valueDoctor = false;
     $scope.valuePatient = false;
     $scope.sessionKey = $window.SessionKey;
 

@@ -78,7 +78,36 @@ namespace PMS.Controllers
             TempData["username"] = sessionKey.UserName;
             return View(sessionKey);
         }
-          
+        //----------------------------
+        public IActionResult DoctorSignup()
+        {
+            SessionKey sessionKey = new SessionKey();
+            sessionKey = HttpContext.Session.GetObjectFromJson<SessionKey>("SessionKey");
+            TempData["username"] = sessionKey.UserName;
+            return View(sessionKey);
+        }
+        public IActionResult ViewAppoinments()
+        {
+            SessionKey sessionKey = new SessionKey();
+            sessionKey = HttpContext.Session.GetObjectFromJson<SessionKey>("SessionKey");
+            TempData["username"] = sessionKey.UserName;
+            return View(sessionKey);
+        }
+        public IActionResult ViewPrescription()
+        {
+            SessionKey sessionKey = new SessionKey();
+            sessionKey = HttpContext.Session.GetObjectFromJson<SessionKey>("SessionKey");
+            TempData["username"] = sessionKey.UserName;
+            return View(sessionKey);
+        }
+        public IActionResult AddTreatments()
+        {
+            SessionKey sessionKey = new SessionKey();
+            sessionKey = HttpContext.Session.GetObjectFromJson<SessionKey>("SessionKey");
+            TempData["username"] = sessionKey.UserName;
+            return View(sessionKey);
+        }
+
         [HttpPost]
         public string GetUserRS(string userName, string password)
         {

@@ -19,6 +19,7 @@ app.controller('APIController', function ($scope, $http, $window, logservicemenu
 
 
 
+    $scope.valueDoctor = false;
     $scope.valuePatient = false;
     $scope.sessionKey = $window.SessionKey;
     
