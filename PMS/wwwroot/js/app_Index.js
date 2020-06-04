@@ -28,6 +28,9 @@ app.controller('APIController', function ($scope, $http, $window, logservicemenu
     if ($scope.sessionKey.userType === "patient") {
         $scope.valuePatient = true;
     } 
+    if ($scope.sessionKey.userType === "doctor") {
+        $scope.valueDoctor = true;
+    }
     console.log("value----", $scope.valuePatient);
 
     $scope.login = function () {

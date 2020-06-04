@@ -8,7 +8,7 @@
 
     angular.module('APIModule').controller('APIController', CoreFunction);
 
-    function CoreFunction() {
+    function CoreFunction($scope, $window) {
         let vm = this,
             addressCollection = [],
             isEditing = false;
@@ -16,8 +16,8 @@
         // functions that are not attached to the view model
         let add = function () {
             let isValiForSaving = false;
-            for (let propertyName in vm.person) {
-                if (vm.person[propertyName].length > 0) {
+            for (let propertyName in vm.Doctor) {
+                if (vm.Doctor[propertyName].length > 0) {
                     isValiForSaving = true;
                 }
             }
@@ -25,34 +25,34 @@
             if (isValiForSaving) {
                 let newPerson = {};
 
-                if (!angular.equals({}, vm.person)) {
+                if (!angular.equals({}, vm.Doctor)) {
                     if (isEditing !== false) {
-                        addressCollection[isEditing] = vm.person;
+                        addressCollection[isEditing] = vm.Doctor;
                         isEditing = false;
                     } else {
-                        newPerson = vm.person;
+                        newPerson = vm.Doctor;
                         addressCollection.push(newPerson);
                     }
 
                     vm.addresses = addressCollection;
-                    vm.person = {};
+                    vm.Doctor = {};
                 }
             }
         },
             edit = function (editPerson) {
                 isEditing = addressCollection.indexOf(editPerson);
-                vm.person = angular.copy(editPerson);
+                vm.Doctor = angular.copy(editPerson);
             },
             remove = function (removePerson) {
                 let index = addressCollection.indexOf(removePerson);
                 addressCollection.splice(index, 1);
                 if (addressCollection.length === 0) {
-                    vm.person = {};
+                    vm.Doctor = {};
                     vm.addresses = undefined;
                 }
             },
             reset = function () {
-                vm.person = {};
+                vm.Doctor = {};
                 vm.search = '';
                 isEditing = false;
             };
