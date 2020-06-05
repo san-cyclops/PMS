@@ -44,7 +44,7 @@
                                                         Surname
                                                     </label>
                                                     <div class="input-icon right">
-                                                        <input id="inputName" ng-model="main.Doctor.Surname" type="text" class="form-control" />
+                                                        <input id="inputName" ng-model="main.Doctor.Surname" required type="text" class="form-control" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -52,7 +52,7 @@
                                                         Name
                                                     </label>
                                                     <div class="input-icon right">
-                                                        <input id="inputName" ng-model="main.Doctor.Name" type="text" class="form-control" />
+                                                        <input id="inputName" ng-model="main.Doctor.Name" required type="text" class="form-control" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -60,7 +60,7 @@
                                                         DateOfBirth
                                                     </label>
                                                     <div class="input-icon right">
-                                                        <input id="inputEmail" ng-model="main.Doctor.DateOfBirth" type="text" class="form-control" />
+                                                        <input id="inputEmail" ng-model="main.Doctor.DateOfBirth" required type="date" class="form-control" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -68,7 +68,7 @@
                                                         Gender
                                                     </label>
                                                     <div class="input-icon right">
-                                                        <select class="form-control" name="Status" id="Status" ng-model="main.Doctor.Gender">
+                                                        <select class="form-control" name="Status" id="Status" required ng-model="main.Doctor.Gender">
                                                             <option value="Male">Male</option>
                                                             <option value="Female">Female</option>
                                                         </select>
@@ -95,7 +95,7 @@
                                                         Mobile Number
                                                     </label>
                                                     <div class="input-icon right">
-                                                        <input id="inputEmail" ng-model="main.Doctor.MobileNumber" type="text" class="form-control" />
+                                                        <input id="inputEmail" ng-model="main.Doctor.MobileNumber" required type="number" class="form-control" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -103,7 +103,7 @@
                                                         Home Number
                                                     </label>
                                                     <div class="input-icon right">
-                                                        <input id="inputEmail" ng-model="main.Doctor.HomeNumber" type="text" class="form-control" />
+                                                        <input id="inputEmail" ng-model="main.Doctor.HomeNumber" type="number" class="form-control" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -111,7 +111,7 @@
                                                         Office Number
                                                     </label>
                                                     <div class="input-icon right">
-                                                        <input id="inputEmail" ng-model="main.Doctor.OfficeNumber" type="text" class="form-control" />
+                                                        <input id="inputEmail" ng-model="main.Doctor.OfficeNumber" type="number" class="form-control" />
                                                     </div>
                                                 </div>
                                                 @*<div class="form-group">
@@ -129,7 +129,7 @@
                                                         Email
                                                     </label>
                                                     <div class="input-icon right">
-                                                        <input id="inputEmail" ng-model="main.Doctor.Email" type="text" class="form-control" />
+                                                        <input id="inputEmail" ng-model="main.Doctor.Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" type="text" class="form-control" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -211,7 +211,7 @@
         </div>
     </div>
 </div>
-<script src="https://code.angularjs.org/1.5.8/angular.js"></script>
+<script src="~/js/angular.js"></script>
 <script src="~/js/app_Doctor.js"></script>
 
 
