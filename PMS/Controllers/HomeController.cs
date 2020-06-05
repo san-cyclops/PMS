@@ -107,6 +107,30 @@ namespace PMS.Controllers
             TempData["username"] = sessionKey.UserName;
             return View(sessionKey);
         }
+        //---------------------
+        public IActionResult ActivatedDocList()
+        {
+            SessionKey sessionKey = new SessionKey();
+            sessionKey = HttpContext.Session.GetObjectFromJson<SessionKey>("SessionKey");
+            TempData["username"] = sessionKey.UserName;
+            return View(sessionKey);
+        }
+        public IActionResult ActivatedPharmacyList()
+        {
+            SessionKey sessionKey = new SessionKey();
+            sessionKey = HttpContext.Session.GetObjectFromJson<SessionKey>("SessionKey");
+            TempData["username"] = sessionKey.UserName;
+            return View(sessionKey);
+        }
+        public IActionResult AdminProfile()
+        {
+            SessionKey sessionKey = new SessionKey();
+            sessionKey = HttpContext.Session.GetObjectFromJson<SessionKey>("SessionKey");
+            TempData["username"] = sessionKey.UserName;
+            return View(sessionKey);
+        }
+
+
 
         [HttpPost]
         public string GetUserRS(string userName, string password)

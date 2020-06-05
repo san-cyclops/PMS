@@ -77,6 +77,35 @@
                         </li>
                     </ul>
                 </div>
+                <div id="template1" ng-cloak ng-show="valueAdmin">
+                    <ul id="side-menu" class="nav">
+
+                        <div class="clearfix"></div>
+                        <li>
+                            <a href="@Url.Action("ActivatedDocList", "Home")">
+                                <i class="fa fa-tachometer fa-fw">
+                                    <div class="icon-bg bg-orange"></div>
+                                </i><span class="menu-title">Activated DocList</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ActivatedPharmacyList", "Home")">
+                                <i class="fa fa-desktop fa-fw">
+                                    <div class="icon-bg bg-pink"></div>
+                                </i><span class="menu-title">Activated PharmacyList</span>
+                            </a>
+
+                        </li>
+                        <li>
+                            <a href="@Url.Action("AdminProfile", "Home")">
+                                <i class="fa fa-send-o fa-fw">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">AdminProfile</span>
+                            </a>
+
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
   

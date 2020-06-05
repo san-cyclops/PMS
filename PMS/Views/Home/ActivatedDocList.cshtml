@@ -1,0 +1,49 @@
+﻿@model PMS.Models.SessionKey
+@{
+    ViewData["Title"] = "ActivatedDocList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    var SessionKey = @Html.Raw(@Json.Serialize(Model));
+</script>
+ 
+
+<div class="panel panel-green">
+    <div class="panel-heading">Doctors For Requested Sytem Approval</div>
+    <div class="panel-body">
+        <label>Search:</label>
+        <input type="text" ng-model="search" />
+        <table class="table table-hover table-bordered" ng-show="approvelDoc">
+            <thead>
+                <tr>
+                    <th>ID Number</th>
+                    <th>Name</th>
+                    <th>Name</th>
+                    <th>Hospital</th>
+                    <th>Department</th>
+                    <th>Approve</th>
+                    <th>View Full Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in approvelDoc |filter:search ">
+                    <td ng-bind="item.doctorID "></td>
+                    <td ng-bind="item.surname"></td>
+                    <td ng-bind="item.name "></td>
+                    <td ng-bind="item.hospitalID"></td>
+                    <td ng-bind="item.department"></td>
+                    <td> <button type="button" class="btn btn-primary">Approve</button></td>
+                    <td> <button type="button" class="btn btn-warning">View</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+ 
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="https://code.angularjs.org/1.5.8/angular.js"></script>
