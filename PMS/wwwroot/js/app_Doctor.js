@@ -76,7 +76,9 @@
 
         $scope.valueDoctor = false;
         $scope.valuePatient = false;
-        
+        $scope.dateOptions = {
+            dateFormat: 'dd/mm/yy',
+        }
 
         $scope.sessionKey = $window.SessionKey;
 
