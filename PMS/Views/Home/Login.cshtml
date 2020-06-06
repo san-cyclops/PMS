@@ -23,7 +23,7 @@
                 <h1>SignIn</h1>
 
                 <div>
-                    <form action="#" method="post">
+                    <form>
                         <input class="text" type="text" data-ng-model="UserName" placeholder="Username" required="">
                         <input class="text" type="password" data-ng-model="Password" placeholder="Password" required="">
                          
@@ -43,11 +43,15 @@
                 <h1>SignUp</h1>
 
                 <div>
-                    <form action="#" method="post">
-                        <input class="text" type="text" name="Username" placeholder="Username" required="">
-                        <input class="text email" type="email" name="email" placeholder="Email" required="">
-                        <input class="text" type="password" name="password" placeholder="Password" required="">
-                        <input class="text w3lpass" type="password" name="password" placeholder="Confirm Password" required="">
+                    <form>
+                        <input class="text" type="text" name="Username" ng-model=UserName placeholder="Username" required="">
+                        <input class="text" type="password" name="password" ng-model=Password placeholder="Password" required="">
+                        <select class="text" type="text"  name="Status" id="Status" ng-model=Type>
+                            <option value="patient">Patient</option>
+                            <option value="Doctor">Doctor</option>
+                            <option value="admin">Ddmin</option>
+                            <option value="pharmacists">Pharmacists</option>
+                        </select>
                         <div class="wthree-text">
                             <label class="anim">
                                 <input type="checkbox" class="checkbox" required="">
@@ -67,12 +71,6 @@
 
 
             </div>
-
-            <div id="Tokyo" class="tabcontent">
-                <h3>Tokyo</h3>
-                <p>Tokyo is the capital of Japan.</p>
-            </div>
-
         </div>
     </div>
 

@@ -544,9 +544,11 @@ app.controller('APIController', function ($scope, $timeout, $q, $window, $http, 
                         console.log("Succss");
                         console.log("NewSAVE-----PERSON", d.data);
                         $scope.Patient = ""; 
+                        alert("Update - Succss");
 
                     }, function (error) {
-                        console.log("Oops! Something went wrong while fetching the data.");
+                            console.log("Oops! Something went wrong while fetching the data.");
+                            alert("Oops! Something went wrong while fetching the data.");
                     });
 
 

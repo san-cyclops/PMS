@@ -50,7 +50,7 @@ app.controller('APIController', function ($scope, $timeout, $q, $window, $http, 
                         console.log("Update - Succss", editmodel);
                         console.log("vm.model", vm.model);
 
-
+                        alert("Update - Succss");
 
                         addressCollection[isEditing] = editmodel;
                         isEditing = false;
@@ -104,13 +104,14 @@ app.controller('APIController', function ($scope, $timeout, $q, $window, $http, 
                     var saveData = logservice.save(JsonString)
 
                     saveData.then(function (d) {
-
+                        alert("Update - Succss");
                         console.log("Succss");
                         console.log("NewPERSON", newPerson);
                         addressCollection.push(savejson);
 
                     }, function (error) {
-                        console.log("Oops! Something went wrong while fetching the data.");
+                            console.log("Oops! Something went wrong while fetching the data.");
+                            alert("Oops! Something went wrong while fetching the data.");
                     });
 
 
@@ -134,7 +135,7 @@ app.controller('APIController', function ($scope, $timeout, $q, $window, $http, 
 
             deleteData.then(function (d) {
 
-                console.log("Succss-Delete");
+                alert("Succss-Delete");
                 console.log("NewPERSON", removePerson, "-", removePerson.ID);
 
 
@@ -145,7 +146,8 @@ app.controller('APIController', function ($scope, $timeout, $q, $window, $http, 
                 }
 
             }, function (error) {
-                console.log("Oops! Something went wrong while fetching the data.");
+                    console.log("Oops! Something went wrong while fetching the data.");
+                    alert("Oops! Something went wrong while fetching the data.")
             });
 
 

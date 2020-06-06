@@ -33,7 +33,7 @@
                         newPerson = vm.Doctor;
                         addressCollection.push(newPerson);
                     }
-
+                    alert("Update - Succss");
                     vm.addresses = addressCollection;
                     vm.Doctor = {};
                 }
@@ -42,6 +42,7 @@
             edit = function (editPerson) {
                 isEditing = addressCollection.indexOf(editPerson);
                 vm.Doctor = angular.copy(editPerson);
+                alert("Update - Succss");
             },
             remove = function (removePerson) {
                 let index = addressCollection.indexOf(removePerson);
@@ -49,6 +50,7 @@
                 if (addressCollection.length === 0) {
                     vm.Doctor = {};
                     vm.addresses = undefined;
+                    alert("Remove - Succss");
                 }
             },
             reset = function () {

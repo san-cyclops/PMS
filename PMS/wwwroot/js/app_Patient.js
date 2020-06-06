@@ -80,7 +80,7 @@ app.controller('APIController', function ($scope, $window, $http, logservice) {
 
                         console.log("Update - Succss", editcoursetype);
                         console.log("vm.coursetype", vm.coursetype);
-
+                        alert("Update - Succss");
 
 
                         addressCollection[isEditing] = editcoursetype;

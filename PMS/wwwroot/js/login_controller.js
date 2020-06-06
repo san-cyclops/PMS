@@ -10,7 +10,16 @@ app.service('logservice', function ($http) {
            
         });
     };
+    this.signUp= function (sub) {
+        console.log("signUp----", "https://localhost:5001/EHealthCareAPI/Patient/SignupPatient");
+        return $http({
+            method: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: sub,
+            url: "https://localhost:5001/EHealthCareAPI/Patient/SignupPatient"
 
+        });
+    };
 });
 
 
@@ -60,10 +69,55 @@ app.controller('APIController', function ($scope, $http, $window,logservice) {
         }, function (error) {
             console.log("Oops! Something went wrong while fetching the data.");
         });
-        
-
     };
 
+    $scope.signUp = function () {
+         
+        var sub = {
+            password: $scope.Password,
+            username: $scope.UserName,
+            patientMasterDataID: 0,
+            userStatus: "",
+            patientData: {
+                surname: "",
+                name: "",
+                dateOfBirth: "",
+                gender: "",
+                homeAddress: "",
+                depentes: "",
+                workAdderss: "",
+                mobileNumber: "",
+                homeNumber: "",
+                officeNumber: "",
+                imageUrl: "",
+                officeEmail: "",
+                email: "",
+                alias: "",
+                patientDataID: 0,
+                patientMasterDataID: 0
+            },
+            authkey: "",
+            traceId: "102030"
+        }
+        console.log("xxxxxxxxxxxxxx", sub);
+        var servCall = logservice.signUp(sub);
+        servCall.then(function (d) {
+            console.log("Done", d.data);
+            if (!d.data.status) {
+                alert(d.data.error);
+            }
+            else {
+                $scope.UserName = '';
+                $scope.Password = '';
+                alert(d.data.statusMessage);
+                onclick = "openCity(event, 'London')
+            }
+
+        }, function (error) {
+            console.log("Oops! Something went wrong while fetching the data.");
+        });
+
+    };
        
    
     
