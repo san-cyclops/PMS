@@ -4,16 +4,83 @@
 
 <link type="text/css" rel="stylesheet" href="~/css/login.css">
 
-<div class="wrapper"  data-ng-app="APIModule">
-    <div class="container" ng-controller="APIController">
-       <form class="form">
-            <input type="text" placeholder="Username" data-ng-model="UserName">
-            <input type="password" placeholder="Password" data-ng-model="Password">
-            <button type="submit" ng-click="login()">Login</button>
-        </form>
+<div data-ng-app="APIModule">
+ 
+
+
+    <div class="main-w3layouts wrapper" ng-controller="APIController">
+        <h1>PMS</h1>
+        <div class="main-agileinfo">
+            <ul class="tab">
+                <li><a href="#" class="tablinks active" onclick="openCity(event, 'London')">SignIn</a></li>
+                <li><a href="#" class="tablinks" onclick="openCity(event, 'Paris')">SignUp</a></li>
+
+            </ul>
+
+
+            <div id="London" class="tabcontent" style="display:block">
+
+                <h1>SignIn</h1>
+
+                <div>
+                    <form action="#" method="post">
+                        <input class="text" type="text" data-ng-model="UserName" placeholder="Username" required="">
+                        <input class="text" type="password" data-ng-model="Password" placeholder="Password" required="">
+                         
+                        <input type="submit" ng-click="login()" value="SIGNUP">
+                    </form>
+                </div>
+
+                <!-- copyright -->
+                <div class="colorlibcopy-agile">
+                   
+                </div>
+
+            </div>
+
+            <div id="Paris" class="tabcontent">
+
+                <h1>SignUp</h1>
+
+                <div>
+                    <form action="#" method="post">
+                        <input class="text" type="text" name="Username" placeholder="Username" required="">
+                        <input class="text email" type="email" name="email" placeholder="Email" required="">
+                        <input class="text" type="password" name="password" placeholder="Password" required="">
+                        <input class="text w3lpass" type="password" name="password" placeholder="Confirm Password" required="">
+                        <div class="wthree-text">
+                            <label class="anim">
+                                <input type="checkbox" class="checkbox" required="">
+                                <span>I Agree To The Terms & Conditions</span>
+                            </label>
+                            <div class="clear"> </div>
+                        </div>
+                        <input type="submit" ng-click="signUp()" value="SIGNUP">
+                    </form>
+                    @*<p>Don't have an Account? <a href="#"> Login Now!</a></p>*@
+                </div>
+
+                <!-- copyright -->
+                <div class="colorlibcopy-agile">
+                    
+                </div>
+
+
+            </div>
+
+            <div id="Tokyo" class="tabcontent">
+                <h3>Tokyo</h3>
+                <p>Tokyo is the capital of Japan.</p>
+            </div>
+
+        </div>
     </div>
 
-    <ul class="bg-bubbles">
+    <ul class="colorlib-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li></li>
         <li></li>
         <li></li>
