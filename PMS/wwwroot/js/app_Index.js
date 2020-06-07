@@ -21,6 +21,9 @@ app.controller('APIController', function ($scope, $http, $window, logservicemenu
 
     $scope.valueDoctor = false;
     $scope.valuePatient = false;
+    $scope.valueAdmin = false;
+    $scope.valuePharmacists = false;
+
     $scope.sessionKey = $window.SessionKey;
     
     console.log("sessionKeyMAINMENU", $scope.sessionKey);
@@ -30,6 +33,12 @@ app.controller('APIController', function ($scope, $http, $window, logservicemenu
     } 
     if ($scope.sessionKey.userType === "doctor") {
         $scope.valueDoctor = true;
+    }
+    if ($scope.sessionKey.userType === "admin") {
+        $scope.valueAdmin = true;
+    }
+    if ($scope.sessionKey.userType === "pharmacists") {
+        $scope.valuePharmacists = true;
     }
     console.log("value----", $scope.valuePatient);
 

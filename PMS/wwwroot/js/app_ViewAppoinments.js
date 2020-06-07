@@ -18,16 +18,31 @@ app.service('logservice', function ($http) {
 app.controller('APIController', function ($scope, $window, $http, logservice) {
 
      
+
+
+    $scope.traceId = "102030"
     $scope.valueDoctor = false;
     $scope.valuePatient = false;
+    $scope.valueAdmin = false;
+    $scope.valuePharmacists = false;
+
     $scope.sessionKey = $window.SessionKey;
-    $scope.traceId = "102030"
 
     console.log("sessionKeyMAINMENU", $scope.sessionKey);
 
+    if ($scope.sessionKey.userType === "patient") {
+        $scope.valuePatient = true;
+    }
     if ($scope.sessionKey.userType === "doctor") {
         $scope.valueDoctor = true;
     }
+    if ($scope.sessionKey.userType === "admin") {
+        $scope.valueAdmin = true;
+    }
+    if ($scope.sessionKey.userType === "pharmacists") {
+        $scope.valuePharmacists = true;
+    }
+  
     console.log("value----", $scope.valueDoctor);
 
     console.log("loadApiment -----");

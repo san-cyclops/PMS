@@ -450,12 +450,24 @@ app.controller('APIController', function ($scope, $timeout, $q, $window, $http, 
 
     $scope.valueDoctor = false;
     $scope.valuePatient = false;
+    $scope.valueAdmin = false;
+    $scope.valuePharmacists = false;
+
     $scope.sessionKey = $window.SessionKey;
 
     console.log("sessionKeyMAINMENU", $scope.sessionKey);
 
     if ($scope.sessionKey.userType === "patient") {
         $scope.valuePatient = true;
+    }
+    if ($scope.sessionKey.userType === "doctor") {
+        $scope.valueDoctor = true;
+    }
+    if ($scope.sessionKey.userType === "admin") {
+        $scope.valueAdmin = true;
+    }
+    if ($scope.sessionKey.userType === "pharmacists") {
+        $scope.valuePharmacists = true;
     }
     console.log("value----", $scope.valuePatient);
 
