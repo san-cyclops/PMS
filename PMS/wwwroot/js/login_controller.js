@@ -10,8 +10,7 @@ app.service('logservice', function ($http) {
            
         });
     };
-    this.signUp= function (sub) {
-        console.log("signUp----", "https://localhost:5001/EHealthCareAPI/Patient/SignupPatient");
+    this.signUpService= function (sub) {
         return $http({
             method: "POST",
             contentType: "application/json; charset=utf-8",
@@ -34,9 +33,9 @@ app.controller('APIController', function ($scope, $http, $window,logservice) {
         var sub = {
             userName: $scope.UserName,
             password: $scope.Password,
-            userType : "string",
-            userStatus : true,
-            traceId : "string" 
+            userType: "string",
+            userStatus: true,
+            traceId: "string"
         }
         var servCall = logservice.getList(sub);
         servCall.then(function (d) {
@@ -70,10 +69,12 @@ app.controller('APIController', function ($scope, $http, $window,logservice) {
             console.log("Oops! Something went wrong while fetching the data.");
         });
     };
+       
+
 
     $scope.signUp = function () {
-         
-        var sub = {
+
+        var subSign = {
             password: $scope.Password,
             username: $scope.UserName,
             patientMasterDataID: 0,
@@ -98,9 +99,10 @@ app.controller('APIController', function ($scope, $http, $window,logservice) {
             },
             authkey: "",
             traceId: "102030"
-        }
-        console.log("xxxxxxxxxxxxxx", sub);
-        var servCall = logservice.signUp(sub);
+        };
+
+        console.log("xxxxxxxxxxxxxx", subSign);
+        var servCall = logservice.signUpService(subSign);
         servCall.then(function (d) {
             console.log("Done", d.data);
             if (!d.data.status) {
@@ -110,7 +112,7 @@ app.controller('APIController', function ($scope, $http, $window,logservice) {
                 $scope.UserName = '';
                 $scope.Password = '';
                 alert(d.data.statusMessage);
-                onclick = "openCity(event, 'London')
+                location.reload(true);
             }
 
         }, function (error) {
@@ -118,8 +120,6 @@ app.controller('APIController', function ($scope, $http, $window,logservice) {
         });
 
     };
-       
-   
     
 });
 
