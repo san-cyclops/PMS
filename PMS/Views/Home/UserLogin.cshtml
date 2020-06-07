@@ -62,7 +62,7 @@
                     <tr ng-repeat="item in main.addresses |filter:main.search ">
                         <td ng-bind="item.firstname "></td>
                         <td ng-bind="item.lastname "></td>
-                        <td ng-bind="item.city "></td>
+                        <td ng-bind="item.city"></td>
                         <td>
                             <button class="btn btn-primary" ng-click="main.editClickHandler(item)">Edit</button>
                             <button class="btn btn-danger" ng-click="main.removeClickHandler(item)">Remove</button>
