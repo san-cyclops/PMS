@@ -1,12 +1,12 @@
 ﻿var app = angular.module('APIModule', []);
 
 app.service('logservice', function ($http) {
-    this.loadapoinments = function (traceId,authkey) {
-        console.log("https://localhost:5001/EHealthCareAPI/Appoinment/ViewAllApoinments?TraceId=" + traceId + "&AuthKey=" + authkey);
+    this.loadapoinments = function (traceId, id, authkey) {
+        console.log("https://localhost:5001/EHealthCareAPI/ViewAllApoinments/" + traceId + "/" + "/" + authkey);
         return $http({
             method: "GET",
             contentType: "application/json; charset=utf-8",
-            url: "https://localhost:5001/EHealthCareAPI/Appoinment/ViewAllApoinments?TraceId=" + traceId + "&AuthKey=" + authkey
+            url: "https://localhost:5001/EHealthCareAPI/ViewAllApoinments/" + traceId + "/"  + "/" + authkey
         });
     };
 
@@ -46,7 +46,7 @@ app.controller('APIController', function ($scope, $window, $http, logservice) {
     console.log("value----", $scope.valueDoctor);
 
     console.log("loadApiment -----");
-    $scope.apoinmentslist = [];
+    $scope.appointment = [];
     var loadApiment = logservice.loadapoinments($scope.traceId, $scope.sessionKey.authKey)
     loadApiment.then(function (d) {
 
@@ -56,7 +56,7 @@ app.controller('APIController', function ($scope, $window, $http, logservice) {
         console.log("length", d.data.length);
         for (var i = 0; i < len; i++) {
             console.log(i, "---", d.data[i]);
-            $scope.apoinmentslist.push(d.data[i]);
+            $scope.appointment.push(d.data[i]);
         }
          
     }, function (error) {

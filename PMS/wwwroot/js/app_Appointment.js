@@ -40,15 +40,15 @@ app.service('logservice', function ($http) {
         });
     };
     this.loadapoinments = function (traceId, id, authkey) {
-        console.log("https://localhost:5001/EHealthCareAPI/Appoinment/ViewAllApoinments?TraceId=" + traceId + "&AuthKey=" + authkey );
+        console.log("https://localhost:5001/EHealthCareAPI/Appoinment/" + traceId + "/" + id + "/" + authkey);
         return $http({
             method: "GET",
             contentType: "application/json; charset=utf-8",
-            url: "https://localhost:5001/EHealthCareAPI/Appoinment/ViewAllApoinments?TraceId=" + traceId + "&AuthKey=" + authkey
+            url: "https://localhost:5001/EHealthCareAPI/Appoinment/" + traceId + "/" + id + "/" + authkey
         });
     };
-    this.loadHospital = function (traceId,lat,lot, authkey) {
-        console.log("https://localhost:5001/EHealthCareAPI/Patient/" + traceId + "/" + lat +"/" + lot+ "/" +  authkey);
+    this.loadHospital = function (traceId, lat, lot, authkey) {
+        console.log("https://localhost:5001/EHealthCareAPI/Patient/" + traceId + "/" + lat + "/" + lot + "/" + authkey);
         return $http({
             method: "GET",
             contentType: "application/json; charset=utf-8",
@@ -64,7 +64,7 @@ app.service('logservice', function ($http) {
         });
     };
     this.loadMedHistory = function (id, traceId, authkey) {
-        console.log("https://localhost:5001/EHealthCareAPI/Treatments/treatMenthistory/" + id + "/" + traceId  + "/" + authkey);
+        console.log("https://localhost:5001/EHealthCareAPI/Treatments/treatMenthistory/" + id + "/" + traceId + "/" + authkey);
         return $http({
             method: "GET",
             contentType: "application/json; charset=utf-8",
@@ -224,16 +224,66 @@ app.controller('APIController', function ($scope, $timeout, $q, $window, $http, 
             isEditing = false;
             let newData = {};
 
-            $scope.sessionKey = $window.SessionKey; 
+            $scope.sessionKey = $window.SessionKey;
 
             console.log("sessionKey", $scope.sessionKey);
             $scope.id = 0;
             $scope.traceId = 102030;
 
+            // Load Patients Data
 
+            var obj = {
+                password: $scope.sessionKey.password,
+                username: $scope.sessionKey.userName,
+                patientMasterDataID: 0,
+                userStatus: "",
+                patientData: {
+                    surname: "",
+                    name: "",
+                    dateOfBirth: "",
+                    gender: "",
+                    homeAddress: "",
+                    depentes: "",
+                    workAdderss: "",
+                    mobileNumber: "",
+                    homeNumber: "",
+                    officeNumber: "",
+                    imageUrl: "",
+                    officeEmail: "",
+                    email: "",
+                    alias: "",
+                    patientDataID: 0,
+                    patientMasterDataID: 0
+                },
+                authkey: $scope.sessionKey.authKey,
+                traceId: "102030"
 
+            }
 
-             
+            //var JsonString = JSON.stringify(obj);
+            var loadData = logservice.loaddata(obj)
+            loadData.then(function (d) {
+
+                console.log("Succss - ", d.data);
+                $scope.patient = {
+                    surname: d.data.patientDetails.patientData.surname,
+                    name: d.data.patientDetails.patientData.name,
+                    dateOfBirth: d.data.patientDetails.patientData.dateOfBirth,
+                    gender: d.data.patientDetails.patientData.gender,
+                    homeAddress: d.data.patientDetails.patientData.homeAddress,
+                    workAdderss: d.data.patientDetails.patientData.workAdderss,
+                    mobileNumber: d.data.patientDetails.patientData.mobileNumber,
+                    homeNumber: d.data.patientDetails.patientData.homeNumber,
+                    depentes: d.data.patientDetails.patientData.depentes,
+                    imageUrl: d.data.patientDetails.patientData.imageUrl,
+                    email: d.data.patientDetails.patientData.email,
+                    officeEmail: d.data.patientDetails.patientData.officeEmail,
+                    patientID: d.data.patientDetails.patientID
+                }
+
+                console.log("patientdddddddd - ", $scope.patient);
+
+                $scope.id = d.data.patientDetails.patientID;
 
                 console.log("loadApiment -----");
                 var loadApiment = logservice.loadapoinments($scope.traceId, $scope.id, $scope.sessionKey.authKey)
@@ -248,15 +298,131 @@ app.controller('APIController', function ($scope, $timeout, $q, $window, $http, 
                         addressCollection.push(d.data[i]);
                     }
                     $scope.apoinmentslist = addressCollection;
-                    console.log("apoinmentslist", $scope.apoinmentslist);
                     vm.model = {};
                 }, function (error) {
                     console.log("Oops! Something went wrong while fetching the data.");
                 });
 
-                
+                console.log("loadHospital -----");
+                var loadHospital = logservice.loadHospital($scope.traceId, 455555.2, 455555.2, $scope.sessionKey.authKey)
+                loadHospital.then(function (d) {
+
+
+
+                    $scope.hospital = [];
+
+                    var len = d.data.length;
+
+
+                    //distance: 3835494.584969937
+                    //email: "athurugiriyaHospital@gov.lk"
+                    //hospitalAddress: "102 Kaduwela - Athurugiriya Road, Colombo"
+                    //hospitalID: 1000
+                    //hospitalName: "Athurugiriya Hospital"
+                    //latitude: 0
+                    //longitude: 0
+                    //negativeFeedbacks: 2
+                    //positiveFeedbacks: 5
+                    //telephoneNumber: "0112561229"
+
+
+                    for (var i = 0; i < len; i++) {
+
+                        var name = d.data[i].hospitalName;
+                        var phone = d.data[i].telephoneNumber;
+                        var hospitalID = d.data[i].hospitalID;
+                        var address = d.data[i].hospitalAddress;
+                        var feedback = d.data[i].positiveFeedbacks;
+                        $scope.hospital.push({
+                            name: name,
+                            phone: phone,
+                            hospitalID: hospitalID,
+                            address: address,
+                            feedback: feedback
+                        });
+                    }
+                    console.log("Succss loadHospital- ", $scope.hospital);
+
+
+                    // person
+                    //loadDoc ----------------------------
+                    $scope.doctor = [];
+                    var loadDoc = logservice.loadDoctor($scope.traceId, 0, $scope.sessionKey.authKey)
+                    loadDoc.then(function (d) {
+
+
+                        var len = d.data.length;
+
+
+                        for (var i = 0; i < len; i++) {
+                            var name = d.data[i].name;
+                            var phone = d.data[i].mobileNumber;
+                            var department = d.data[i].department;
+                            var hospitalxID = d.data[i].hospitalID;
+                            var DoctorDataID = d.data[i].doctorDataID;
+                            $scope.doctor.push({
+                                name: name,
+                                phone: phone,
+                                department: department,
+                                hospitalID: hospitalxID,
+                                doctorID: DoctorDataID
+                            });
+                        }
+                        console.log("Succss loadHospital- ", $scope.doctor);
+
+                    }, function (error) {
+                        console.log("Oops! Something went wrong while fetching the data.");
+                    });
+
+                    $scope.filterExpression = function (doctor) {
+                        return (doctor.hospitalID === $scope.Patient.hospital.hospitalID);
+                    };
+
+                    //Load Medical History ---------------------------
+
+                    $scope.medHistory = [];
+                    var loadMedHistory = logservice.loadMedHistory($scope.id, $scope.traceId, $scope.sessionKey.authKey)
+                    loadMedHistory.then(function (d) {
+
+                        console.log("Succss - ", d.data);
+
+                        var len = d.data.length;
+                        console.log("length", d.data.length);
+
+                        console.log("length", d.data.length);
+                        for (var i = 0; i < len; i++) {
+                            console.log(i, "---", d.data[i]);
+                            $scope.medHistory.push(d.data[i]);
+                        }
+                        console.log("medHistory", $scope.medHistory);
+
+                    }, function (error) {
+                        console.log("Oops! Something went wrong while fetching the data.");
+                    });
+
+
+
+                }, function (error) {
+                    console.log("Oops! Something went wrong while fetching the data.");
+                });
+
+
+
+
+
+            }, function (error) {
+                console.log("Oops! Something went wrong while fetching the data.");
+            });
+
+            //Load Apoinments---------------------------------------------
+
+        },
+        loadDoctor = function () {
+
+
+
         };
- 
+
 
 
     // view model attached click handlers
@@ -306,6 +472,103 @@ app.controller('APIController', function ($scope, $timeout, $q, $window, $http, 
     console.log("value----", $scope.valuePatient);
 
     vm.pageLoad();
- 
+
+
+    $scope.saveData = function () {
+        let isValiForSaving = false;
+        for (let propertyName in $scope.Patient) {
+            if ($scope.Patient[propertyName].length > 0) {
+                isValiForSaving = true;
+            }
+        }
+
+        if (isValiForSaving) {
+            let newPerson = {};
+
+
+            if (isEditing !== false) {
+
+                console.log("aa", isEditing);
+                console.log("data", ccc);
+
+                var editmodel = vm.model;
+
+                var JsonEditString = JSON.stringify(vm.model);
+
+                var updateData = logservice.update(JsonEditString, vm.model.ID)
+                var result = false;
+
+                updateData.then(function (d) {
+
+                    console.log("Update - Succss", editmodel);
+                    console.log("vm.model", vm.model);
+
+
+
+                    addressCollection[isEditing] = editmodel;
+                    isEditing = false;
+                    result = true;
+
+                }, function (error) {
+                    result = false;
+                    console.log("Oops! Something went wrong while fetching the data.");
+                    alert("Oops! Something went wrong while fetching the data.");
+                });
+
+                //if (result === true) {
+                //    console.log("Res");
+                //    addressCollection[isEditing] = vm.model;
+                //    isEditing = false;
+                //};
+
+            } else {
+
+                console.log("xxxxx", $scope.Patient);
+
+                var obj = {
+                    password: $scope.sessionKey.password,
+                    username: $scope.sessionKey.userName,
+                    TimeSlot: "",
+                    DoctorID: $scope.Patient.hospital.hospitalID,
+                    ProblemBrief: $scope.Patient.ProblemBrief,
+                    AppoinmentDate: $scope.Patient.AppoinmentDate,
+                    Age: $scope.Patient.Age.toString(),
+                    Patient: {
+                        PatientMasterDataID: $scope.id
+                    },
+                    Doctor: {
+                        DoctorID: $scope.Patient.doctor.doctorID
+                    },
+                    Hospital: {
+                        HospitalID: $scope.Patient.hospital.hospitalID
+                    },
+                    authkey: $scope.sessionKey.authKey,
+                    traceId: "102030"
+                }
+
+                var JsonEditString = JSON.stringify(obj);
+                console.log("JsonEditString--------", JsonEditString);
+
+                var saveData = logservice.save(obj)
+
+                saveData.then(function (d) {
+
+                    console.log("Succss");
+                    console.log("NewSAVE-----PERSON", d.data);
+                    $scope.Patient = "";
+                    alert("Update - Succss");
+
+                }, function (error) {
+                    console.log("Oops! Something went wrong while fetching the data.");
+                    alert("Oops! Something went wrong while fetching the data.");
+                });
+
+
+            }
+
+
+
+        }
+    }
 
 });
