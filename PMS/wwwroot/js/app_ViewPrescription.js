@@ -1,12 +1,12 @@
 ﻿var app = angular.module('APIModule', []);
 
 app.service('logservice', function ($http) {
-    this.loadapoinments = function (traceId, id, authkey) {
-        console.log("https://localhost:5001/EHealthCareAPI/ViewAllApoinments/" + traceId + "/" + "/" + authkey);
+    this.loadapoinments = function (id,traceId, authkey) {
+        console.log("https://localhost:5001/EHealthCareAPI/Treatments/" + id + "/" + traceId + "/" + authkey);
         return $http({
             method: "GET",
             contentType: "application/json; charset=utf-8",
-            url: "https://localhost:5001/EHealthCareAPI/ViewAllApoinments/" + traceId + "/"  + "/" + authkey
+            url: "https://localhost:5001/EHealthCareAPI/Treatments/" + id + "/" + traceId + "/" + authkey
         });
     };
 
@@ -46,20 +46,27 @@ app.controller('APIController', function ($scope, $window, $http, logservice) {
     console.log("value----", $scope.valueDoctor);
 
     console.log("loadApiment -----");
-    $scope.appointment = [];
-    var loadApiment = logservice.loadapoinments($scope.traceId, $scope.sessionKey.authKey)
-    loadApiment.then(function (d) {
+   
 
-        console.log("Succss - ", d.data);
+    $scope.viewPre = function () {
 
-        var len = d.data.length;
-        console.log("length", d.data.length);
-        for (var i = 0; i < len; i++) {
-            console.log(i, "---", d.data[i]);
-            $scope.appointment.push(d.data[i]);
-        }
-         
-    }, function (error) {
-        console.log("Oops! Something went wrong while fetching the data.");
-    });
+        var loadApiment = logservice.loadapoinments($scope.PrescriptionID, $scope.traceId, $scope.sessionKey.authKey)
+        loadApiment.then(function (d) {
+
+            console.log("Succss - ", d.data);
+
+            var len = d.data.length;
+            $scope.apoinmentslist = d.data;
+            $scope.medicine = d.data.medicine;
+            console.log("medicine", d.data.medicine);
+            //console.log("length", d.data.length);
+            //for (var i = 0; i < len; i++) {
+            //    console.log(i, "---", d.data[i]);
+            //    $scope.apoinmentslist.push(d.data[i]);
+            //}
+
+        }, function (error) {
+            console.log("Oops! Something went wrong while fetching the data.");
+        });
+    }
 });
