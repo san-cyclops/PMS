@@ -44,21 +44,23 @@
                                     <div class="panel-body">
                                         <label>Search:</label>
                                         <input type="text" ng-model="search" />
-                                        <table class="table table-hover table-bordered" ng-show="appointment">
+                                        <table class="table table-hover table-bordered" ng-show="apoinmentslist">
                                             <thead>
                                                 <tr>
                                                     <th>PatientName</th>
                                                     <th>ProblemBrief</th>
                                                     <th>AppoinmentDate</th>
+                                                    <th>MobileNumber</th>
                                                     <th>DoctorName</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat="item in appointment |filter:search ">
-                                                    <td ng-bind="item.PatientName "></td>
-                                                    <td ng-bind="item.ProblemBrief "></td>
-                                                    <td ng-bind="item.AppoinmentDate "></td>
-                                                    <td ng-bind="item.DoctorName "></td> 
+                                                <tr ng-repeat="item in apoinmentslist |filter:search ">
+                                                    <td ng-bind="item.patientName "></td>
+                                                    <td ng-bind="item.problemBrief "></td>
+                                                    <td ng-bind="item.appoinmentDate "></td>
+                                                    <td ng-bind="item.mobileNumber "></td>
+                                                    <td ng-bind="item.doctorName "></td>
                                                 </tr>
                                             </tbody>
                                         </table>
