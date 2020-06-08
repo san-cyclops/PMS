@@ -48,7 +48,7 @@ app.controller('APIController', function ($scope, $http, $window, logservicemenu
 
     console.log("value----", $scope.valuePatient);
     $scope.getfeedback = function () {
-        alert("Feedback Updated - Succss");
+        alert("Thank - Feedback Updated - Succss");
         $scope.feedback = false;
     }
     $scope.login = function () {
