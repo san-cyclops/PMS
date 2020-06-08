@@ -172,10 +172,10 @@
                                                                             <div class="input-icon right" custom-select="t as t.name for t in hospital | filter: { name: $searchTerm }"
                                                                                  ng-model="Patient.hospital">
                                                                                 <div class="pull-left">
-                                                                                    <strong>{{ t.name }}</strong><br />
-                                                                                    <span>{{t.phone }}</span><br />
-                                                                                    <span>{{t.address }}</span><br />
-                                                                                    <span>{{t.feedback }}</span>
+                                                                                    <strong>Hospital Name:{{ t.name }}</strong><br />
+                                                                                    <span>Tp : {{t.phone }}</span><br />
+                                                                                    <span>Address :{{t.address }}</span><br />
+                                                                                    <span>Good Reviews :{{t.feedback }}%</span>
                                                                                 </div>
                                                                                 <div class="clearfix"></div>
                                                                             </div>
@@ -192,8 +192,9 @@
                                                                             <div class="input-icon right" custom-select="t as t.name for t in doctor | filter: filterExpression"
                                                                                  ng-model="Patient.doctor">
                                                                                 <div class="pull-left">
-                                                                                    <strong>{{ t.name }}</strong><br />
-                                                                                    <span>{{ t.phone }}</span>
+                                                                                    <strong>Doctor Name :{{ t.name }}</strong><br />
+                                                                                    <span>Deparment :{{ t.department }}</span><br />
+                                                                                    <span>Tp :{{ t.phone }}</span>
                                                                                 </div>
                                                                                 <div class="clearfix"></div>
                                                                             </div>
