@@ -129,7 +129,13 @@ namespace PMS.Controllers
             TempData["username"] = sessionKey.UserName;
             return View(sessionKey);
         }
-
+        public IActionResult PharmacistProfile()
+        {
+            SessionKey sessionKey = new SessionKey();
+            sessionKey = HttpContext.Session.GetObjectFromJson<SessionKey>("SessionKey");
+            TempData["username"] = sessionKey.UserName;
+            return View(sessionKey);
+        }
 
 
         [HttpPost]
