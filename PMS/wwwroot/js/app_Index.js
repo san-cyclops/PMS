@@ -42,7 +42,7 @@ app.controller('APIController', function ($scope, $http, $window, logservicemenu
         $scope.valuePharmacists = true;
     }
 
-    if ($scope.sessionKey.userName === "amilaprageeth@gmail.com") {
+    if ($scope.sessionKey.userName === "prageeth1@gmail.com") {
         $scope.feedback = true;
     }
 
