@@ -24,8 +24,8 @@ app.service('logservice', function ($http) {
 
 app.controller('APIController', function ($scope, $http, $window,logservice) {
 
-    $scope.UserName = 'doctor1@gmail.com';
-    $scope.Password = '123';
+    $scope.UserName = '';
+    $scope.Password = '';
 
     $scope.login = function () {
 
