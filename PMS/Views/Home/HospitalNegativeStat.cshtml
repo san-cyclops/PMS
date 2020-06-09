@@ -1,0 +1,111 @@
+﻿@model PMS.Models.SessionKey
+@{
+    ViewData["Title"] = "ViewAppoinments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    var SessionKey = @Html.Raw(@Json.Serialize(Model));
+</script>
+
+
+
+<!-- basic styles -->
+
+
+
+<link rel="stylesheet" href="~/css/style.css" />
+
+
+<div ng-app="APIModule">
+    <div ng-controller="APIController">
+        <div id="wrapper">
+            <!--BEGIN SIDEBAR MENU-->
+
+            @Html.Partial("_MainMenu")
+            <!--BEGIN THEME SETTING-->
+
+            <div id="page-wrapper">
+                <!--BEGIN TITLE & BREADCRUMB PAGE-->
+                <!--SUB TITLE -- SANJEEWA-->
+                <!--END TITLE & BREADCRUMB PAGE-->
+                <!--BEGIN CONTENT-->
+                <div class="page-content">
+                    <div id="tab-general">
+                        <div class="row mbl">
+                            
+                            <div class="row">
+                                <div class="col-lg-12">
+
+
+                                    <div class="panel panel-green">
+                                        <div class="panel-heading">View HospitalNegativeStat</div>
+                                        <div class="panel-body">
+                                            <label>Search:</label>
+                                            <input type="text" ng-model="search" />
+                                            <div ng-show="apoinmentslist"> 
+                                                <table class="table table-hover table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>HospitalID</th>
+                                                            <th>HospitalName</th>
+                                                            <th>TelephoneNumber</th>
+                                                            <th>Email</th>
+                                                            <th>NegativeFeedbacks(%)</th>
+                                                        </tr>
+                                                    </thead>
+
+
+                                                    <tbody>
+                                                        <tr ng-repeat="x in apoinmentslist |filter:search ">
+                                                            <td ng-bind="x.hospitalID "></td>
+                                                            <td ng-bind="x.hospitalName "></td>
+                                                            <td ng-bind="x.telephoneNumber "></td>
+                                                            <td ng-bind="x.email "></td>
+                                                            <td ng-bind="x.negativeFeedbacks"%></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--END CONTENT-->
+                <!--BEGIN FOOTER-->
+                <div id="footer">
+                    <div class="copyright">
+
+                    </div>
+                </div>
+                <!--END FOOTER-->
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- basic scripts -->
+<!--[if !IE]> -->
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!-- <![endif]-->
+<!--[if IE]>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<![endif]-->
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="https://code.angularjs.org/1.5.8/angular.js"></script>
+<script src="~/js/protractor.js"></script>
+
+
+<script src="~/js/customSelect.js"></script>
+<script src="~/js/app_ViewHospital.js"></script>
+
+
+
+
+

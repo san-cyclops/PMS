@@ -136,6 +136,23 @@ namespace PMS.Controllers
             TempData["username"] = sessionKey.UserName;
             return View(sessionKey);
         }
+        
+        public IActionResult HospitalPostiveStat()
+        {
+            SessionKey sessionKey = new SessionKey();
+            sessionKey = HttpContext.Session.GetObjectFromJson<SessionKey>("SessionKey");
+            TempData["username"] = sessionKey.UserName;
+            return View(sessionKey);
+        } 
+        public IActionResult HospitalNegativeStat()
+        {
+            SessionKey sessionKey = new SessionKey();
+            sessionKey = HttpContext.Session.GetObjectFromJson<SessionKey>("SessionKey");
+            TempData["username"] = sessionKey.UserName;
+            return View(sessionKey);
+        }
+
+
 
 
         [HttpPost]
