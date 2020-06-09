@@ -17,11 +17,11 @@ namespace PMS.Controllers
     {
         const string SessionKey = "_AuthKey";
 
-        public IActionResult Index(string UserName,string Password,string AuthKey,string UserType) 
+        public IActionResult Index(string UserName,string AuthKey,string UserType) 
         {
             SessionKey sessionKey = new SessionKey();
             sessionKey.UserName = UserName;
-            sessionKey.Password = Password;
+            sessionKey.Password = "";
             sessionKey.AuthKey = AuthKey;
             sessionKey.UserType = UserType;
 

@@ -61,7 +61,7 @@ app.controller('APIController', function ($scope, $http, $window,logservice) {
 
                 //$http.post('/Home/Index', JsonString);
 
-                var url = '/Home/Index?UserName=' + $scope.UserName + "&Password=" + $scope.Password + "&AuthKey=" + $scope.param + "&UserType=" + $scope.userType
+                var url = '/Home/Index?UserName=' + $scope.UserName + "&AuthKey=" + $scope.param + "&UserType=" + $scope.userType
                 window.open(url, "_self");
             }
 
